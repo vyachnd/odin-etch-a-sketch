@@ -1,0 +1,44 @@
+.flex {
+  display: flex;
+  gap: 8px;
+}
+.inline-flex {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.flex_col {
+  flex-direction: column;
+}
+
+.top,
+.right,
+.bottom,
+.left {
+  position: absolute;
+}
+
+.top.center,
+.bottom.center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.right.center,
+.left.center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.top {
+  top: 0;
+}
+.right {
+  right: 0;
+}
+.bottom {
+  bottom: 0;
+}
+.left {
+  left: 0;
+}
