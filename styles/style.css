@@ -2,6 +2,8 @@
 @import './colors.css';
 @import './global.css';
 
+@import './custom/main.css';
+
 * {
   color: rgb(var(--color-zinc-50));
   box-sizing: border-box;
@@ -15,4 +17,16 @@ body {
   background-color: rgb(var(--color-zinc-900));
   width: 100%;
   min-height: 100vh;
+}
+
+#app {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  display: flex;
+  gap: 24px;
+  padding: 24px;
 }
