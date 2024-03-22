@@ -1,0 +1,61 @@
+@import './sizes/base.css';
+@import './sizes/sm.css';
+@import './sizes/xs.css';
+
+@import './states/iconOnly.css';
+@import './states/disabled.css';
+
+@import './variants/base.css';
+@import './variants/secondary.css';
+@import './variants/submit.css';
+@import './variants/warning.css';
+@import './variants/error.css';
+
+.button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  border: none;
+  outline: none;
+  display: flex;
+  align-self: flex-start;
+  justify-content: center;
+
+  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.button .button__text {
+  color: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.button .button__icon {
+  color: inherit;
+}
+
+/* .... */
+.button {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.button:not(:disabled):hover,
+.button:not(:disabled):focus-visible:hover {
+  background-color: var(--hover-bg-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.button:not(:disabled):active,
+.button:not(:disabled):focus-visible:active {
+  background-color: var(--active-bg-color);
+  color: var(--active-text-color);
+}
+
+.button:not(:disabled):focus-visible {
+  outline: 1px solid var(--focus-outline-color);
+}

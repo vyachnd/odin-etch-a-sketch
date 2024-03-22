@@ -1,0 +1,13 @@
+.button[data-size='sm'] {
+  border-radius: 4px;
+  padding: 6px 12px;
+  gap: 4px;
+}
+
+.button[data-size='sm'] .button__text {
+  font: var(--font-medium-sm);
+}
+
+.button[data-size='sm'] .button__icon {
+  font-size: 20px;
+}

@@ -1,0 +1,11 @@
+.button[data-icon-only] {
+  padding: 8px;
+}
+
+.button[data-icon-only][data-size='sm'] {
+  padding: 6px;
+}
+
+.button[data-icon-only][data-size='xs'] {
+  padding: 4px;
+}

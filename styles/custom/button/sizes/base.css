@@ -1,0 +1,13 @@
+.button {
+  border-radius: 6px;
+  padding: 8px 16px;
+  gap: 6px;
+}
+
+.button .button__text {
+  font: var(--font-medium);
+}
+
+.button .button__icon {
+  font-size: 24px;
+}

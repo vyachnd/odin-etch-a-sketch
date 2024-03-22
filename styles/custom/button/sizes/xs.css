@@ -1,0 +1,13 @@
+.button[data-size='xs'] {
+  border-radius: 3px;
+  padding: 4px 8px;
+  gap: 3px;
+}
+
+.button[data-size='xs'] .button__text {
+  font: var(--font-medium-xs);
+}
+
+.button[data-size='xs'] .button__icon {
+  font-size: 16px;
+}

@@ -1,0 +1,38 @@
+.button[data-variant='error'] {
+  --bg-color: rgba(var(--color-red-700));
+  --text-color: rgba(var(--color-red-100));
+
+  --hover-bg-color: rgba(var(--color-red-600));
+  --hover-text-color: rgba(var(--color-red-50));
+
+  --active-bg-color: rgba(var(--color-red-500));
+  --active-text-color: rgba(var(--color-red-50));
+
+  --focus-outline-color: rgba(var(--color-red-50));
+}
+
+.button[data-variant='error'][data-transparent] {
+  --bg-color: rgba(var(--color-red-400), 0.12);
+  --text-color: rgba(var(--color-red-400));
+
+  --hover-bg-color: rgba(var(--color-red-400), 0.18);
+  --hover-text-color: rgba(var(--color-red-300));
+
+  --active-bg-color: rgba(var(--color-red-400), 0.24);
+  --active-text-color: rgba(var(--color-red-50));
+
+  --focus-outline-color: rgba(var(--color-red-400));
+}
+
+.button[data-variant='error']:not([data-fill]) {
+  --bg-color: none;
+  --text-color: rgba(var(--color-red-400));
+
+  --hover-bg-color: rgba(var(--color-red-400), 0.08);
+  --hover-text-color: rgba(var(--color-red-300));
+
+  --active-bg-color: rgba(var(--color-red-400), 0.12);
+  --active-text-color: rgba(var(--color-red-200));
+
+  --focus-outline-color: rgba(var(--color-red-400));
+}
