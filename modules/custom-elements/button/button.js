@@ -7,7 +7,7 @@ class CustomButton {
     this.options = {
       id: null,
       text: 'Button',
-      icon: 'box',
+      icon: null,
       iconSecondary: null,
       size: null,
       variant: null,
