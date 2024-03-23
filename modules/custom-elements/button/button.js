@@ -14,6 +14,7 @@ class CustomButton {
       transparent: false,
       fill: true,
       iconOnly: false,
+      active: false,
       disabled: false,
       cls: [],
       ...options,
@@ -71,6 +72,11 @@ class CustomButton {
 
   setIconOnly(iconOnly) {
     this.options.iconOnly = iconOnly;
+    this.update();
+  }
+
+  setActive(active) {
+    this.options.active = active;
     this.update();
   }
 
@@ -157,6 +163,13 @@ class CustomButton {
       if (this.options.text) buttonText.remove();
     } else {
       delete button.dataset.iconOnly;
+    }
+
+    // Active
+    if (this.options.active) {
+      button.dataset.active = '';
+    } else {
+      delete button.dataset.active;
     }
 
     // Disabled

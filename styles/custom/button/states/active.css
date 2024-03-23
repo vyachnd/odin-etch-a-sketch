@@ -1,0 +1,21 @@
+.button[data-active] {
+  background-color: var(--hover-bg-color);
+  color: var(--hover-text-color);
+}
+
+.button[data-active]:not(:disabled):hover,
+.button[data-active]:not(:disabled):focus-visible:hover {
+  background-color: var(--active-bg-color);
+  color: var(--active-text-color);
+  cursor: pointer;
+}
+
+.button[data-active]:not(:disabled):active,
+.button[data-active]:not(:disabled):focus-visible:active {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.button[data-active]:not(:disabled):focus-visible {
+  outline: 1px solid var(--focus-outline-color);
+}

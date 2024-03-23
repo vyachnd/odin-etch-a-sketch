@@ -4,6 +4,7 @@
 
 @import './states/iconOnly.css';
 @import './states/disabled.css';
+@import './states/active.css';
 
 @import './variants/base.css';
 @import './variants/secondary.css';
