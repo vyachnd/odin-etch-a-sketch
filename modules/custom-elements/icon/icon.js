@@ -7,8 +7,7 @@
 */
 
 class CustomIcon {
-  constructor(parent, options) {
-    this.parent = parent || null;
+  constructor(options) {
     this.options = {
       type: 'outlined',
       fill: false,
@@ -19,6 +18,7 @@ class CustomIcon {
       cls: [],
       ...options,
     };
+    this.parent = null;
     this.elements = new Map();
   }
 
@@ -83,17 +83,18 @@ class CustomIcon {
     `;
   }
 
-  render() {
-    if (!this.parent) return null;
+  render(parent) {
+    if (!parent) return null;
 
-    if (!this.elements.has('icon')) {
-      const icon = document.createElement('span');
+    let icon = this.elements.get('icon');
+
+    if (!icon) {
+      icon = document.createElement('span');
       this.elements.set('icon', icon);
-
-      this.update();
-
-      this.parent.append(icon);
     }
+
+    this.parent = parent;
+    this.parent.append(icon);
 
     this.update();
   }

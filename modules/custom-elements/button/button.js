@@ -2,8 +2,7 @@ import Emitter from '../../../libraries/emitter.js';
 import CustomIcon from '../icon/icon.js';
 
 class CustomButton {
-  constructor(parent, options) {
-    this.parent = parent || null;
+  constructor(options) {
     this.options = {
       id: null,
       text: 'Button',
@@ -20,6 +19,7 @@ class CustomButton {
       cls: [],
       ...options,
     };
+    this.parent = null;
     this.elements = new Map();
     this.emitter = new Emitter();
 
@@ -202,8 +202,8 @@ class CustomButton {
     this.elements.clear();
   }
 
-  render() {
-    if (!this.parent) return null;
+  render(parent) {
+    if (!parent) return null;
 
     let button = this.elements.get('button');
 
@@ -231,14 +231,15 @@ class CustomButton {
         cls: ['button__icon', 'button__icon-left'],
       });
       this.elements.set('iconSecondary', iconSecondary);
-
-      this.parent.append(button);
     }
 
     button.addEventListener('click', this.handleClick);
     button.addEventListener('mousedown', this.handleMouseDown);
     button.addEventListener('mouseup', this.handleMouseUp);
     button.addEventListener('dblclick', this.handleDblClick);
+
+    this.parent = parent;
+    this.parent.append(button);
 
     this.update();
   }
