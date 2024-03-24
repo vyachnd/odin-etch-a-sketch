@@ -1,0 +1,7 @@
+.button[data-align='left'] {
+  justify-content: flex-start;
+}
+
+.button[data-align='right'] {
+  justify-content: flex-end;
+}

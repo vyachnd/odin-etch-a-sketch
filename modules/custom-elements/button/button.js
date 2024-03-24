@@ -13,6 +13,7 @@ class CustomButton {
       variant: null,
       transparent: false,
       fill: true,
+      align: null,
       iconOnly: false,
       active: false,
       disabled: false,
@@ -67,6 +68,11 @@ class CustomButton {
 
   setFill(fill) {
     this.options.fill = fill;
+    this.update();
+  }
+
+  setAlign(align) {
+    this.options.align = align;
     this.update();
   }
 
@@ -154,6 +160,13 @@ class CustomButton {
       button.dataset.fill = '';
     } else {
       delete button.dataset.fill;
+    }
+
+    // Align
+    if (this.options.align) {
+      button.dataset.align = this.options.align;
+    } else {
+      delete button.dataset.align;
     }
 
     // Icon Only
