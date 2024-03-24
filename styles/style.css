@@ -1,7 +1,3 @@
-@import './fonts.css';
-@import './colors.css';
-@import './global.css';
-
 @import './custom/main.css';
 
 * {
@@ -20,13 +16,9 @@ body {
 }
 
 #app {
-  display: block;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-
   display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
   gap: 24px;
   padding: 24px;
 }
