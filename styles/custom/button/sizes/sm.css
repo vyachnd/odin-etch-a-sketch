@@ -1,7 +1,7 @@
 .button[data-size='sm'] {
   border-radius: 4px;
   padding: 6px 12px;
-  gap: 4px;
+  gap: 6px;
 }
 
 .button[data-size='sm'] .button__text {

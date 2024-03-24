@@ -1,7 +1,7 @@
 .button[data-size='xs'] {
   border-radius: 3px;
   padding: 4px 8px;
-  gap: 3px;
+  gap: 4px;
 }
 
 .button[data-size='xs'] .button__text {
