@@ -22,7 +22,6 @@
   border: none;
   outline: none;
   display: flex;
-  align-self: flex-start;
   justify-content: center;
 
   transition: background-color 0.15s, color 0.15s, opacity 0.15s;
