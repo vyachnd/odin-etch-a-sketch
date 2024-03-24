@@ -5,7 +5,7 @@
 }
 
 .button .button__text {
-  font: var(--font-medium);
+  font: var(--font-roboto-medium);
 }
 
 .button .button__icon {

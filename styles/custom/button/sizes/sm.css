@@ -5,7 +5,7 @@
 }
 
 .button[data-size='sm'] .button__text {
-  font: var(--font-medium-sm);
+  font: var(--font-roboto-medium-sm);
 }
 
 .button[data-size='sm'] .button__icon {
