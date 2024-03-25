@@ -1,6 +1,14 @@
 import Emitter from '../../../libraries/emitter.js';
 import CustomIcon from '../icon/icon.js';
 
+const getOpszBySize = (size) => {
+  switch (size) {
+    case 'xs': return 20;
+    case 'sm': return 24;
+    default: return 40;
+  }
+};
+
 class CustomButton {
   constructor(options) {
     this.options = {
@@ -127,6 +135,7 @@ class CustomButton {
     // Icon
     if (this.options.icon) {
       icon.setIcon(this.options.icon);
+      icon.setOpsz(getOpszBySize(this.options.size));
       icon.render(button);
       button.prepend(icon.target);
     } else {
@@ -136,6 +145,7 @@ class CustomButton {
     // Secondary Icon
     if (this.options.iconSecondary) {
       iconSecondary.setIcon(this.options.iconSecondary);
+      iconSecondary.setOpsz(getOpszBySize(this.options.size));
       iconSecondary.render(button);
     } else {
       iconSecondary.destroy();
