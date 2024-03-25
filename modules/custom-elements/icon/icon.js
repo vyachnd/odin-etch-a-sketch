@@ -6,6 +6,8 @@
   Optical Size: 20px, 24px, 40px, 48px
 */
 
+import debounce from '../../../libraries/debounce.js';
+
 class CustomIcon {
   constructor(options) {
     this.options = {
@@ -20,38 +22,40 @@ class CustomIcon {
     };
     this.parent = null;
     this.elements = new Map();
+
+    this.updateDebounce = debounce(this.update.bind(this), 100);
   }
 
   get target() { return this.elements.get('icon'); }
 
   setType(type) {
     this.options.type = type;
-    this.update();
+    this.updateDebounce();
   }
 
   toggleFill() {
     this.options.fill = !this.options.fill;
-    this.update();
+    this.updateDebounce();
   }
 
   setWght(wght) {
     this.options.wght = Math.max(100, Math.min(780, wght));
-    this.update();
+    this.updateDebounce();
   }
 
   setGrad(grad) {
     this.options.grad = Math.max(-25, Math.min(200, grad));
-    this.update();
+    this.updateDebounce();
   }
 
   setOpsz(opsz) {
     this.options.opsz = Math.max(20, Math.min(48, opsz));
-    this.update();
+    this.updateDebounce();
   }
 
   setIcon(icon) {
     this.options.icon = icon;
-    this.update();
+    this.updateDebounce();
   }
 
   destroy() {
