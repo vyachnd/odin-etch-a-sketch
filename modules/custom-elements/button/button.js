@@ -216,7 +216,7 @@ class CustomButton {
       buttonText.classList.add('button__text');
       this.elements.set('buttonText', buttonText);
 
-      const icon = new CustomIcon(button, {
+      const icon = new CustomIcon({
         type: 'rounded',
         fill: true,
         icon: this.options.icon,
@@ -224,7 +224,7 @@ class CustomButton {
       });
       this.elements.set('icon', icon);
 
-      const iconSecondary = new CustomIcon(button, {
+      const iconSecondary = new CustomIcon({
         type: 'rounded',
         fill: true,
         icon: this.options.iconSecondary,
