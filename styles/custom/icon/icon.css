@@ -23,3 +23,10 @@
   direction: ltr;
   -webkit-font-smoothing: antialiased;
 }
+
+.custom-icon {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -17,7 +17,7 @@ class CustomIcon {
       grad: 0,
       opsz: 24,
       icon: 'circle',
-      cls: [],
+      cls: ['custom-icon'],
       ...options,
     };
     this.parent = null;
