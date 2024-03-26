@@ -12,7 +12,7 @@ class CustomInput {
       rounded: false,
       leftElement: null,
       rightElement: null,
-      cls: [],
+      cls: ['custom-input'],
       ...options,
     };
     this.parent = null;
@@ -104,7 +104,7 @@ class CustomInput {
     if (!input) return null;
 
     if (input.classList.length > 0) input.className = '';
-    input.classList.add('custom-input', ...this.options.cls);
+    input.classList.add(...this.options.cls);
 
     if (this.options.id && inputField.id !== this.options.id) inputField.id = this.options.id;
     if (!this.options.id) delete inputField.id;
