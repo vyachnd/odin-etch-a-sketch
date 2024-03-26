@@ -101,8 +101,6 @@ class CustomInput {
   update() {
     const input = this.elements.get('input');
     const inputField = this.elements.get('inputField');
-    const leftElement = this.elements.get('leftElement');
-    const rightElement = this.elements.get('rightElement');
 
     if (!input) return null;
 
@@ -125,38 +123,6 @@ class CustomInput {
     // Create Left/Right Elements
     this.#createLeftRightElement('leftElement', this.options.leftElement);
     this.#createLeftRightElement('rightElement', this.options.rightElement);
-
-    /*
-        // Left Element
-        if (!this.options.leftElement) {
-          if (leftElement) leftElement.destroy();
-          this.elements.delete('leftElement');
-        } else {
-          if (this.options.leftElement !== leftElement) {
-            if (leftElement) leftElement.destroy();
-    
-            this.options.leftElement.options.cls.push('custom-input__left-element');
-            this.options.leftElement.render(input);
-            input.prepend(this.options.leftElement.target);
-            this.elements.set('leftElement', this.options.leftElement);
-          }
-        }
-    
-        // Right Element
-        if (!this.options.rightElement) {
-          if (rightElement) rightElement.destroy();
-          this.elements.delete('rightElement');
-        } else {
-          if (this.options.rightElement !== rightElement) {
-            if (rightElement) rightElement.destroy();
-    
-            this.options.rightElement.options.cls.push('custom-input__right-element');
-            this.options.rightElement.render(input);
-            input.append(this.options.rightElement.target);
-            this.elements.set('rightElement', this.options.rightElement);
-          }
-        }
-    */
   }
 
   destroy() {
