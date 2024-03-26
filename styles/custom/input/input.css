@@ -1,0 +1,46 @@
+@import './states/disabled.css';
+@import './states/rounded.css';
+
+.custom-input {
+  background-color: rgba(var(--color-zinc-800));
+  color: rgba(var(--color-zinc-50));
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 6px;
+
+  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.custom-input .custom-input__field {
+  all: initial;
+  appearance: none;
+
+  color: inherit;
+
+  width: 100%;
+  padding: 8px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font: var(--font-roboto-normal);
+}
+.custom-input .custom-input__field:only-child {
+  padding: 8px 16px;
+}
+.custom-input .custom-input__field:first-child {
+  padding-left: 16px;
+}
+.custom-input .custom-input__field:last-child {
+  padding-right: 16px;
+}
+.custom-input .custom-input__field:placeholder {
+  color: rgba(var(--color-zinc-50), 0.24);
+}
+
+.custom-input .custom-icon {
+  margin: 8px;
+}

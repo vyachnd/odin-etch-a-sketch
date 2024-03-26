@@ -1,0 +1,5 @@
+.custom-input:disabled,
+.custom-input[data-disabled] {
+  opacity: 0.24;
+  pointer-events: none;
+}
