@@ -14,11 +14,3 @@ body {
   width: 100%;
   min-height: 100vh;
 }
-
-#app {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 24px;
-  padding: 24px;
-}
