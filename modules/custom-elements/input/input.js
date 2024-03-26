@@ -22,6 +22,7 @@ class CustomInput {
     this.updateDebounce = debounce(this.update.bind(this), 100);
 
     this.setValue = this.setValue.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
   #createLeftRightElement(elementPosition, params) {
@@ -74,6 +75,8 @@ class CustomInput {
 
   get leftElement() { return this.elements.get('leftElement'); }
   get rightElement() { return this.elements.get('rightElement'); }
+
+  handleInput(event) { this.emitter.fire('handleInput', event); }
 
   setValue(value) {
     this.options.value = value;
@@ -182,6 +185,8 @@ class CustomInput {
         get: () => inputField.value,
         set: (value) => this.setValue(value),
       });
+
+      inputField.addEventListener('input', this.handleInput.bind(this));
 
       input.append(inputField);
     }
