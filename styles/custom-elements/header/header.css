@@ -1,0 +1,39 @@
+.custom-header {
+  color: rgb(var(--color-zinc-50));
+  display: flex;
+  gap: 4px;
+}
+
+.custom-header .custom-header__container {
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-header .custom-header__heading {
+  color: inherit;
+  font: var(--font-roboto-black);
+}
+
+.custom-header .custom-header__subheading,
+.custom-header .custom-header__link {
+  color: rgba(var(--color-zinc-50), 0.6);
+  font: var(--font-roboto-medium-xs);
+}
+
+.custom-header .custom-header__link {
+  color: rgb(var(--color-sky-400));
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.custom-header .custom-header__link:hover {
+  color: rgb(var(--color-sky-50));
+}
+.custom-header .custom-header__link:active {
+  color: rgb(var(--color-sky-200));
+}
+
+.custom-header .custom-header__icon {
+  color: inherit;
+  font-size: 40px;
+}
