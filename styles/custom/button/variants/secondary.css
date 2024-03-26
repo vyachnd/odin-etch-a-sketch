@@ -1,4 +1,4 @@
-.button[data-variant='secondary'] {
+.custom-button[data-variant='secondary'] {
   --bg-color: rgba(var(--color-sky-700));
   --text-color: rgba(var(--color-sky-100));
 
@@ -11,7 +11,7 @@
   --focus-outline-color: rgba(var(--color-sky-50));
 }
 
-.button[data-variant='secondary'][data-transparent] {
+.custom-button[data-variant='secondary'][data-transparent] {
   --bg-color: rgba(var(--color-sky-400), 0.12);
   --text-color: rgba(var(--color-sky-400));
 
@@ -24,7 +24,7 @@
   --focus-outline-color: rgba(var(--color-sky-400));
 }
 
-.button[data-variant='secondary']:not([data-fill]) {
+.custom-button[data-variant='secondary']:not([data-fill]) {
   --bg-color: none;
   --text-color: rgba(var(--color-sky-400));
 

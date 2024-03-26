@@ -1,5 +1,5 @@
-.button:disabled,
-.button[data-disabled] {
+.custom-button:disabled,
+.custom-button[data-disabled] {
   opacity: 0.24;
   pointer-events: none;
 }

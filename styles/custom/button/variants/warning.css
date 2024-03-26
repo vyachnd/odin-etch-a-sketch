@@ -1,4 +1,4 @@
-.button[data-variant='warning'] {
+.custom-button[data-variant='warning'] {
   --bg-color: rgba(var(--color-yellow-700));
   --text-color: rgba(var(--color-yellow-100));
 
@@ -11,7 +11,7 @@
   --focus-outline-color: rgba(var(--color-yellow-50));
 }
 
-.button[data-variant='warning'][data-transparent] {
+.custom-button[data-variant='warning'][data-transparent] {
   --bg-color: rgba(var(--color-yellow-400), 0.12);
   --text-color: rgba(var(--color-yellow-400));
 
@@ -24,7 +24,7 @@
   --focus-outline-color: rgba(var(--color-yellow-400));
 }
 
-.button[data-variant='warning']:not([data-fill]) {
+.custom-button[data-variant='warning']:not([data-fill]) {
   --bg-color: none;
   --text-color: rgba(var(--color-yellow-400));
 

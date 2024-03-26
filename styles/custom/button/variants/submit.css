@@ -1,4 +1,4 @@
-.button[data-variant='submit'] {
+.custom-button[data-variant='submit'] {
   --bg-color: rgba(var(--color-emerald-700));
   --text-color: rgba(var(--color-emerald-100));
 
@@ -11,7 +11,7 @@
   --focus-outline-color: rgba(var(--color-emerald-50));
 }
 
-.button[data-variant='submit'][data-transparent] {
+.custom-button[data-variant='submit'][data-transparent] {
   --bg-color: rgba(var(--color-emerald-400), 0.12);
   --text-color: rgba(var(--color-emerald-400));
 
@@ -24,7 +24,7 @@
   --focus-outline-color: rgba(var(--color-emerald-400));
 }
 
-.button[data-variant='submit']:not([data-fill]) {
+.custom-button[data-variant='submit']:not([data-fill]) {
   --bg-color: none;
   --text-color: rgba(var(--color-emerald-400));
 

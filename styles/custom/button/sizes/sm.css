@@ -1,13 +1,13 @@
-.button[data-size='sm'] {
+.custom-button[data-size='sm'] {
   border-radius: 4px;
   padding: 6px 12px;
   gap: 6px;
 }
 
-.button[data-size='sm'] .button__text {
+.custom-button[data-size='sm'] .button__text {
   font: var(--font-roboto-medium-sm);
 }
 
-.button[data-size='sm'] .button__icon {
+.custom-button[data-size='sm'] .button__icon {
   font-size: 20px;
 }

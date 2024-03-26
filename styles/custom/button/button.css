@@ -14,7 +14,7 @@
 @import './variants/warning.css';
 @import './variants/error.css';
 
-.button {
+.custom-button {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -28,36 +28,36 @@
   transition: background-color 0.15s, color 0.15s, opacity 0.15s;
 }
 
-.button .button__text {
+.custom-button .button__text {
   color: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.button .button__icon {
+.custom-button .button__icon {
   color: inherit;
 }
 
 /* .... */
-.button {
+.custom-button {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
 
-.button:not(:disabled):hover,
-.button:not(:disabled):focus-visible:hover {
+.custom-button:not(:disabled):hover,
+.custom-button:not(:disabled):focus-visible:hover {
   background-color: var(--hover-bg-color);
   color: var(--hover-text-color);
   cursor: pointer;
 }
 
-.button:not(:disabled):active,
-.button:not(:disabled):focus-visible:active {
+.custom-button:not(:disabled):active,
+.custom-button:not(:disabled):focus-visible:active {
   background-color: var(--active-bg-color);
   color: var(--active-text-color);
 }
 
-.button:not(:disabled):focus-visible {
+.custom-button:not(:disabled):focus-visible {
   outline: 1px solid var(--focus-outline-color);
 }

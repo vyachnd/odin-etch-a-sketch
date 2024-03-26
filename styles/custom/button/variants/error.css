@@ -1,4 +1,4 @@
-.button[data-variant='error'] {
+.custom-button[data-variant='error'] {
   --bg-color: rgba(var(--color-red-700));
   --text-color: rgba(var(--color-red-100));
 
@@ -11,7 +11,7 @@
   --focus-outline-color: rgba(var(--color-red-50));
 }
 
-.button[data-variant='error'][data-transparent] {
+.custom-button[data-variant='error'][data-transparent] {
   --bg-color: rgba(var(--color-red-400), 0.12);
   --text-color: rgba(var(--color-red-400));
 
@@ -24,7 +24,7 @@
   --focus-outline-color: rgba(var(--color-red-400));
 }
 
-.button[data-variant='error']:not([data-fill]) {
+.custom-button[data-variant='error']:not([data-fill]) {
   --bg-color: none;
   --text-color: rgba(var(--color-red-400));
 

@@ -1,7 +1,7 @@
-.button[data-align='left'] {
+.custom-button[data-align='left'] {
   justify-content: flex-start;
 }
 
-.button[data-align='right'] {
+.custom-button[data-align='right'] {
   justify-content: flex-end;
 }
