@@ -23,6 +23,7 @@ class CustomButton {
       fill: true,
       align: null,
       iconOnly: false,
+      rounded: false,
       active: false,
       disabled: false,
       cls: [],
@@ -89,6 +90,11 @@ class CustomButton {
 
   setIconOnly(iconOnly) {
     this.options.iconOnly = iconOnly;
+    this.updateDebounce();
+  }
+
+  setRounded(rounded) {
+    this.options.rounded = rounded;
     this.updateDebounce();
   }
 
@@ -189,6 +195,13 @@ class CustomButton {
       if (this.options.text) buttonText.remove();
     } else {
       delete button.dataset.iconOnly;
+    }
+
+    // Rounded
+    if (this.options.rounded) {
+      button.dataset.rounded = '';
+    } else {
+      delete button.dataset.rounded;
     }
 
     // Active

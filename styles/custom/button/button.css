@@ -6,6 +6,7 @@
 @import './states/disabled.css';
 @import './states/active.css';
 @import './states/align.css';
+@import './states/rounded.css';
 
 @import './variants/base.css';
 @import './variants/secondary.css';
