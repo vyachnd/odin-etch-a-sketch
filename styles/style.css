@@ -1,4 +1,4 @@
-@import './custom/main.css';
+@import './custom-elements/custom-elements.css';
 
 * {
   color: rgb(var(--color-zinc-50));
