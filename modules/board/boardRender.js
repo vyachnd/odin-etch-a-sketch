@@ -1,4 +1,4 @@
-import Emitter from '../libraries/emitter.js';
+import Emitter from '../../libraries/emitter.js';
 
 class BoardRender {
   constructor(board) {

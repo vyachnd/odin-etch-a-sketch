@@ -1,4 +1,4 @@
-import Emitter from '../libraries/emitter.js';
+import Emitter from '../../libraries/emitter.js';
 
 const PIXEL_SIZE = 40;
 const ZOOM_STEP = 0.1;
