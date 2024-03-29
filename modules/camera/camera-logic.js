@@ -14,7 +14,13 @@ class CameraLogic {
     this.render.emitter.on('handleMouseDown', this.handleMouseDown.bind(this));
     this.render.emitter.on('handleMouseUp', this.handleMouseUp.bind(this));
     this.render.emitter.on('handleMouseMove', this.handleMouseMove.bind(this));
+    this.render.emitter.on('handleKeyDown', this.handleKeyDown.bind(this));
+    this.render.emitter.on('handleWheel', this.handleWheel.bind(this));
   }
+
+  zoom(value) { this.camera.setZoom(value); }
+  zoomIn() { this.camera.zoomIn(); }
+  zoomOut() { this.camera.zoomOut(); }
 
   move(position) {
     this.camera.move(position);
@@ -57,6 +63,21 @@ class CameraLogic {
 
       this.move(position);
     }
+  }
+
+  handleKeyDown(event) {
+    const { ctrlKey, metaKey, key } = event;
+
+    if ((ctrlKey || metaKey) && (key === '+' || key === '=')) this.zoomIn();
+    if ((ctrlKey || metaKey) && (key === '-')) this.zoomOut();
+    if ((ctrlKey || metaKey) && (key === '0')) this.zoom(1);
+  }
+
+  handleWheel(event) {
+    const { ctrlKey, metaKey, deltaY } = event;
+
+    if ((ctrlKey || metaKey) && deltaY < 0) this.zoomIn();
+    if ((ctrlKey || metaKey) && deltaY > 0) this.zoomOut();
   }
 }
 
