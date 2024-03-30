@@ -3,11 +3,11 @@ import CameraLogic from './camera-logic.js';
 import CameraRender from './camera-render.js';
 
 function Camera(options = {}) {
-  const camera = new CameraEntity(options.camera);
-  const render = new CameraRender(camera, options.render);
-  const logic = new CameraLogic(camera, render, options.logic);
+  const entity = new CameraEntity(options.entity);
+  const render = new CameraRender(entity, options.render);
+  const logic = new CameraLogic(entity, render, options.logic);
 
-  return { camera, render, logic };
+  return { entity, render, logic };
 }
 
 export default Camera;
