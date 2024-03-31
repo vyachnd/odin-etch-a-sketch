@@ -3,6 +3,7 @@ import Emitter from '../../libraries/emitter.js';
 class CameraEntity {
   constructor() {
     this.position = { x: 0, y: 0 };
+    this.moveable = true;
     this.zoom = {
       current: 1,
       max: 4,
@@ -10,6 +11,11 @@ class CameraEntity {
       step: 0.1,
     };
     this.emitter = new Emitter();
+  }
+
+  setMoveable(moveable) {
+    this.moveable = moveable;
+    this.emitter.fire('moveable', this.moveable);
   }
 
   setZoom(value) {
