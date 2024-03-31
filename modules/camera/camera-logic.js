@@ -1,8 +1,8 @@
 import Emitter from '../../libraries/emitter.js';
 
 class CameraLogic {
-  constructor(camera, render) {
-    this.camera = camera;
+  constructor(entity, render) {
+    this.entity = entity;
     this.render = render;
     this.emitter = new Emitter();
 
@@ -18,12 +18,12 @@ class CameraLogic {
     this.render.emitter.on('handleWheel', this.handleWheel.bind(this));
   }
 
-  zoom(value) { this.camera.setZoom(value); }
-  zoomIn() { this.camera.zoomIn(); }
-  zoomOut() { this.camera.zoomOut(); }
+  zoom(value) { this.entity.setZoom(value); }
+  zoomIn() { this.entity.zoomIn(); }
+  zoomOut() { this.entity.zoomOut(); }
 
   move(position) {
-    this.camera.move(position);
+    this.entity.move(position);
   }
 
   centering() {
@@ -44,8 +44,8 @@ class CameraLogic {
 
     this.mouse.down = true;
     this.mouse.offset = {
-      x: event.clientX - this.camera.position.x - cameraRect.left,
-      y: event.clientY - this.camera.position.y - cameraRect.top,
+      x: event.clientX - this.entity.position.x - cameraRect.left,
+      y: event.clientY - this.entity.position.y - cameraRect.top,
     };
   }
 
