@@ -1,0 +1,79 @@
+import debounce from '../../../libraries/debounce.js';
+import Emitter from '../../../libraries/emitter.js';
+
+class BoardRender {
+  constructor(entity, options) {
+    this.entity = entity;
+    this.options = {
+      cls: [],
+      ...options,
+    };
+    this.parent = null;
+    this.elements = new Map();
+    this.emitter = new Emitter();
+
+    this.updateDebounce = debounce(this.update.bind(this), 100);
+
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+  }
+
+  get target() { return this.elements.get('board'); }
+
+  handleMouseDown(event) { this.emitter.fire('handleMouseDown', event); }
+  handleMouseUp(event) { this.emitter.fire('handleMouseUp', event); }
+  handleMouseMove(event) { this.emitter.fire('handleMouseMove', event); }
+
+  update() {
+    const board = this.elements.get('board');
+
+    if (!board && !this.entity) return null;
+
+    const { width, height } = this.entity.size;
+    const { x, y } = this.entity.position;
+
+    if (board.classList.length > 0) board.className = '';
+    board.classList.add('board', ...this.options.cls);
+
+    board.style.width = `${width}px`;
+    board.style.height = `${height}px`;
+
+    board.style.top = `${y}px`;
+    board.style.left = `${x}px`;
+  }
+
+  destroy() {
+    const board = this.elements.get('board');
+
+    if (board) board.remove();
+
+    window.removeEventListener('mousedown', this.handleMouseUp, { passive: false });
+    window.removeEventListener('mouseup', this.handleMouseMove, { passive: false });
+    window.removeEventListener('mousemove', this.handleWheelZoom, { passive: false });
+
+    this.elements.clear();
+  }
+
+  render(parent) {
+    if (!parent && !this.entity) return null;
+
+    let board = this.elements.get('board');
+
+    if (!board) {
+      board = document.createElement('div');
+      this.elements.set('board', board);
+
+      window.addEventListener('mousedown', this.handleMouseDown, { passive: false });
+      window.addEventListener('mouseup', this.handleMouseUp, { passive: false });
+      window.addEventListener('mousemove', this.handleMouseMove, { passive: false });
+    }
+
+    this.update();
+
+    this.parent = parent;
+    this.parent.append(board);
+  }
+}
+
+export default BoardRender;
