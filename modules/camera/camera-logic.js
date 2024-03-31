@@ -31,8 +31,8 @@ class CameraLogic {
     const cameraScreenElement = this.render.elements.get('cameraScreen');
 
     const position = {
-      x: (cameraElement.clientWidth - cameraScreenElement.clientWidth) / 2,
-      y: (cameraElement.clientHeight - cameraScreenElement.clientHeight) / 2,
+      x: Math.floor((cameraElement.clientWidth - cameraScreenElement.clientWidth) / 2),
+      y: Math.floor((cameraElement.clientHeight - cameraScreenElement.clientHeight) / 2),
     };
 
     this.move(position);
