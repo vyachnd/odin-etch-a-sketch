@@ -55,7 +55,7 @@ class CameraLogic {
   }
 
   handleMouseMove(event) {
-    if (this.mouse.down) {
+    if (this.mouse.down && this.entity.moveable) {
       const position = {
         x: event.clientX - this.mouse.offset.x,
         y: event.clientY - this.mouse.offset.y,
