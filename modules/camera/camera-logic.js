@@ -18,25 +18,23 @@ class CameraLogic {
     this.render.emitter.on('handleWheel', this.handleWheel.bind(this));
   }
 
+  get center() {
+    const cameraElement = this.render.elements.get('camera');
+    const cammeraScreenElement = this.render.elements.get('cameraScreen');
+    const cameraRect = cameraElement.getBoundingClientRect();
+    const cameraScreenRect = cammeraScreenElement.getBoundingClientRect();
+
+    return {
+      x: Math.floor((cameraRect.width - cameraScreenRect.width) / 2) - this.entity.position.x,
+      y: Math.floor((cameraRect.height - cameraScreenRect.height) / 2) - this.entity.position.y,
+    };
+  }
+
   zoom(value) { this.entity.setZoom(value); }
   zoomIn() { this.entity.zoomIn(); }
   zoomOut() { this.entity.zoomOut(); }
 
-  move(position) {
-    this.entity.move(position);
-  }
-
-  centering() {
-    const cameraElement = this.render.elements.get('camera');
-    const cameraScreenElement = this.render.elements.get('cameraScreen');
-
-    const position = {
-      x: Math.floor((cameraElement.clientWidth - cameraScreenElement.clientWidth) / 2),
-      y: Math.floor((cameraElement.clientHeight - cameraScreenElement.clientHeight) / 2),
-    };
-
-    this.move(position);
-  }
+  move(position) { this.entity.move(position); }
 
   handleMouseDown(event) {
     const cameraElement = this.render.elements.get('camera');
