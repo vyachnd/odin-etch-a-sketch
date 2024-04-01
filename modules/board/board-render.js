@@ -21,6 +21,20 @@ class BoardRender {
 
   get target() { return this.elements.get('board'); }
 
+  get scale() {
+    const board = this.elements.get('board');
+
+    if (!board) return;
+
+    const rect = board.getBoundingClientRect();
+    const size = this.entity.size;
+
+    return {
+      x: rect.width / size.width,
+      y: rect.height / size.height,
+    };
+  }
+
   handleMouseDown(event) { this.emitter.fire('handleMouseDown', event); }
   handleMouseUp(event) { this.emitter.fire('handleMouseUp', event); }
   handleMouseMove(event) { this.emitter.fire('handleMouseMove', event); }

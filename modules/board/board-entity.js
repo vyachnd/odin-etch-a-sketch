@@ -21,6 +21,18 @@ class BoardEntity {
   }
 
   get pixelSize() { return PIXEL_SIZE; }
+
+  positionToPixel(position) {
+    const pixel = {
+      x: Math.floor(position.x / this.pixelSize),
+      y: Math.floor(position.y / this.pixelSize),
+    };
+
+    pixel.x = Math.min(this.grid.rows - 1, Math.max(0, pixel.x));
+    pixel.y = Math.min(this.grid.cols - 1, Math.max(0, pixel.y));
+
+    return pixel;
+  }
 }
 
 export default BoardEntity;
