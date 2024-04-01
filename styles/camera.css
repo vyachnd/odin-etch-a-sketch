@@ -15,11 +15,4 @@
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
   transition: transform 0.15s;
-
-  transform: scale(1);
-}
-
-.camera .camera__screen * {
-  transform-origin: center;
-  transform: translate(-50%, -50%);
 }
