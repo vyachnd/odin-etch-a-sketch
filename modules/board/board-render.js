@@ -48,9 +48,8 @@ class BoardRender {
 
     if (board) board.remove();
 
-    window.removeEventListener('mousedown', this.handleMouseUp, { passive: false });
-    window.removeEventListener('mouseup', this.handleMouseMove, { passive: false });
-    window.removeEventListener('mousemove', this.handleWheelZoom, { passive: false });
+    window.removeEventListener('mouseup', this.handleMouseUp);
+    window.removeEventListener('mousemove', this.handleMouseMove);
 
     this.elements.clear();
   }
@@ -64,9 +63,9 @@ class BoardRender {
       board = document.createElement('div');
       this.elements.set('board', board);
 
-      window.addEventListener('mousedown', this.handleMouseDown, { passive: false });
-      window.addEventListener('mouseup', this.handleMouseUp, { passive: false });
-      window.addEventListener('mousemove', this.handleMouseMove, { passive: false });
+      board.addEventListener('mousedown', this.handleMouseDown);
+      window.addEventListener('mouseup', this.handleMouseUp);
+      window.addEventListener('mousemove', this.handleMouseMove);
     }
 
     this.update();
