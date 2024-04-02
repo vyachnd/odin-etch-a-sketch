@@ -17,7 +17,7 @@ class CustomIcon {
       grad: 0,
       opsz: 24,
       icon: 'circle',
-      cls: ['custom-icon'],
+      cls: [],
       ...options,
     };
     this.parent = null;
@@ -75,7 +75,7 @@ class CustomIcon {
     if (this.options.type === 'outlined') icon.classList.add(`material-symbols-outlined`);
     if (this.options.type === 'rounded') icon.classList.add(`material-symbols-rounded`);
     if (this.options.type === 'sharp') icon.classList.add(`material-symbols-sharp`);
-    icon.classList.add(...this.options.cls);
+    icon.classList.add('custom-icon', ...this.options.cls);
 
     icon.textContent = this.options.icon;
 

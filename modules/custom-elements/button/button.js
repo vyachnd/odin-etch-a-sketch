@@ -26,7 +26,7 @@ class CustomButton {
       rounded: false,
       active: false,
       disabled: false,
-      cls: ['custom-button'],
+      cls: [],
       ...options,
     };
     this.parent = null;
@@ -119,7 +119,7 @@ class CustomButton {
 
     if (this.options.id) button.id = this.options.id;
     if (button.classList.length > 0) button.className = '';
-    button.classList.add(...this.options.cls);
+    button.classList.add('custom-button', ...this.options.cls);
 
     // Size
     if (this.options.size) {
