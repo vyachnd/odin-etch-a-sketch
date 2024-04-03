@@ -1,16 +1,14 @@
 import debounce from '../../../libraries/debounce.js';
-import Emitter from '../../../libraries/emitter.js';
 
 class BoardRender {
   constructor(entity, options) {
-    this.entity = entity;
+    this._entity = entity;
     this.options = {
       cls: [],
       ...options,
     };
     this.parent = null;
     this.elements = new Map();
-    this.emitter = new Emitter();
 
     this.updateDebounce = debounce(this.update.bind(this), 100);
 
@@ -21,15 +19,15 @@ class BoardRender {
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
   }
 
+  get emitter() { return this._entity.emitter; }
   get target() { return this.elements.get('board'); }
-
   get scale() {
     const board = this.elements.get('board');
 
     if (!board) return;
 
     const rect = board.getBoundingClientRect();
-    const size = this.entity.size;
+    const size = this._entity.size;
 
     return {
       x: rect.width / size.width,
@@ -37,19 +35,19 @@ class BoardRender {
     };
   }
 
+  handleMouseLeave(event) { this.emitter.fire('handleMouseLeave', event); }
+  handleMouseEnter(event) { this.emitter.fire('handleMouseEnter', event); }
   handleMouseDown(event) { this.emitter.fire('handleMouseDown', event); }
   handleMouseUp(event) { this.emitter.fire('handleMouseUp', event); }
   handleMouseMove(event) { this.emitter.fire('handleMouseMove', event); }
-  handleMouseLeave(event) { this.emitter.fire('handleMouseLeave', event); }
-  handleMouseEnter(event) { this.emitter.fire('handleMouseEnter', event); }
 
   update() {
     const board = this.elements.get('board');
 
-    if (!board && !this.entity) return null;
+    if (!board && !this._entity) return null;
 
-    const { width, height } = this.entity.size;
-    const { x, y } = this.entity.position;
+    const { width, height } = this._entity.size;
+    const { x, y } = this._entity.position;
 
     if (board.classList.length > 0) board.className = '';
     board.classList.add('board', ...this.options.cls);
@@ -73,7 +71,7 @@ class BoardRender {
   }
 
   render(parent) {
-    if (!parent && !this.entity) return null;
+    if (!parent && !this._entity) return null;
 
     let board = this.elements.get('board');
 
@@ -81,9 +79,9 @@ class BoardRender {
       board = document.createElement('div');
       this.elements.set('board', board);
 
-      board.addEventListener('mousedown', this.handleMouseDown);
       board.addEventListener('mouseleave', this.handleMouseLeave);
       board.addEventListener('mouseenter', this.handleMouseEnter);
+      board.addEventListener('mousedown', this.handleMouseDown);
       window.addEventListener('mouseup', this.handleMouseUp);
       window.addEventListener('mousemove', this.handleMouseMove);
     }

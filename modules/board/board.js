@@ -7,7 +7,7 @@ function Board(options = {}) {
   const render = new BoardRender(entity, options.render);
   const logic = new BoardLogic(entity, render, options.logic);
 
-  return { entity, render, logic };
+  return logic;
 }
 
 export default Board;

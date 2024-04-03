@@ -1,87 +1,64 @@
-import Emitter from '../../libraries/emitter.js';
-
 class BoardLogic {
   constructor(entity, render) {
-    this.entity = entity;
-    this.render = render;
-    this.emitter = new Emitter();
+    this._entity = entity;
+    this._render = render;
 
-    this.mouse = {
-      offset: { x: 0, y: 0 },
-      down: false,
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+
+    this.emitter.on('handleMouseLeave', this.handleMouseLeave);
+    this.emitter.on('handleMouseEnter', this.handleMouseEnter);
+    this.emitter.on('handleMouseDown', this.handleMouseDown);
+    this.emitter.on('handleMouseUp', this.handleMouseUp);
+    this.emitter.on('handleMouseMove', this.handleMouseMove);
+  }
+
+  get cellSize() { return this._entity.grid.cellSize; }
+  get emitter() { return this._entity.emitter; }
+  get target() { return this._render.target; }
+  get scale() { return this._render.scale; }
+
+  calculatePosition(clientX, clientY) {
+    const boardRect = this.target.getBoundingClientRect();
+    const position = {
+      x: Math.floor((clientX - boardRect.left) / this.scale.x),
+      y: Math.floor((clientY - boardRect.top) / this.scale.y),
     };
 
-    this.render.emitter.on('handleMouseDown', this.handleMouseDown.bind(this));
-    this.render.emitter.on('handleMouseUp', this.handleMouseUp.bind(this));
-    this.render.emitter.on('handleMouseMove', this.handleMouseMove.bind(this));
-    this.render.emitter.on('handleMouseLeave', this.handleMouseLeave.bind(this));
-    this.render.emitter.on('handleMouseEnter', this.handleMouseEnter.bind(this));
+    return position;
   }
+  posToCell(position) { return this._entity.calculatePositionToCell(position); }
+  cellToPos(cell) { return this._entity.calculateCellToPosition(cell); }
 
-  calculateOffset(clientX, clientY) {
-    const rect = this.render.target.getBoundingClientRect();
-    const scale = this.render.scale;
+  isMouseOut(position) { return this._entity.isMouseOut(position); }
 
-    return {
-      x: Math.floor((clientX - rect.left) / scale.x),
-      y: Math.floor((clientY - rect.top) / scale.y),
-    };
-  }
-
-  calculatePixel(clientX, clientY) {
-    const offset = this.calculateOffset(clientX, clientY);
-    const pixel = this.entity.positionToPixel(offset);
-
-    return pixel;
-  }
-
-  handleMouseDown(event) {
-    if (event.target !== this.render.target) return;
-
-    const offset = this.calculateOffset(event.clientX, event.clientY);
-    const pixel = this.entity.positionToPixel(offset);
-
-    if (!this.entity.isWithinBoard(pixel)) return;
-
-    this.mouse = {
-      ...this.mouse,
-      down: true,
-      offset: offset,
-    };
-
-    this.emitter.fire('handleMouseDown', event, { pixel, mouse: this.mouse });
-  }
-
-  handleMouseUp(event) {
-    const pixel = this.calculatePixel(event.clientX, event.clientY);
-
-    this.mouse = {
-      ...this.mouse,
-      down: false,
-      offset: { x: 0, y: 0 }
-    };
-
-    this.emitter.fire('handleMouseUp', event, { pixel, mouse: this.mouse });
-  }
-
-  handleMouseMove(event) {
-    const pixel = this.calculatePixel(event.clientX, event.clientY);
-
-    if (!this.entity.isWithinBoard(pixel)) return;
-
-    this.emitter.fire('handleMouseMove', event, { pixel, mouse: this.mouse });
-  }
+  destroy() { this._render.destroy(); }
+  render(parent) { this._render.render(parent); }
 
   handleMouseLeave(event) {
-    const pixel = this.calculatePixel(event.clientX, event.clientY);
-
-    this.emitter.fire('handleMouseLeave', event, { pixel, mouse: this.mouse });
+    const position = this.calculatePosition(event.clientX, event.clientY);
+    this._entity.onMouseLeave(position, event);
   }
-
   handleMouseEnter(event) {
-    const pixel = this.calculatePixel(event.clientX, event.clientY);
+    const position = this.calculatePosition(event.clientX, event.clientY);
+    this._entity.onMouseEnter(position, event);
+  }
+  handleMouseDown(event) {
+    const position = this.calculatePosition(event.clientX, event.clientY);
+    this._entity.onMouseDown(position, event);
+  }
+  handleMouseUp(event) {
+    const position = this.calculatePosition(event.clientX, event.clientY);
+    this._entity.onMouseUp(position, event);
+  }
+  handleMouseMove(event) {
+    event.preventDefault();
 
-    this.emitter.fire('handleMouseEnter', event, { pixel, mouse: this.mouse });
+    const position = this.calculatePosition(event.clientX, event.clientY);
+    this._entity.onMouseMove(position, event);
   }
 }
 
