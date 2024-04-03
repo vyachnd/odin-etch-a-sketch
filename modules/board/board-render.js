@@ -47,7 +47,7 @@ class BoardRender {
   update() {
     const board = this.elements.get('board');
 
-    if (!board && !this._entity) return null;
+    if (!board || !this._entity) return null;
 
     const { width, height } = this._entity.size;
     const { x, y } = this._entity.position;
