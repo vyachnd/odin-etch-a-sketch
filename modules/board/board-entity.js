@@ -25,6 +25,15 @@ class BoardEntity {
     };
   }
 
+  #setMouse(mouse) {
+    const isOut = this.isMouseOut(mouse.position || this.mouse.position);
+
+    this.mouse = { ...this.mouse, ...mouse, isOut };
+
+    this.mouse.cell = this.calculatePositionToCell(this.mouse.position);
+    this.mouse.cellPos = this.calculateCellToPosition(this.mouse.cell);
+  }
+
   calculatePositionToCell(position) {
     return {
       x: Math.floor(position.x / this.grid.cellSize),
@@ -45,33 +54,24 @@ class BoardEntity {
     return false;
   }
 
-  setMouse(mouse) {
-    const isOut = this.isMouseOut(mouse.position || this.mouse.position);
-
-    this.mouse = { ...this.mouse, ...mouse, isOut };
-
-    this.mouse.cell = this.calculatePositionToCell(this.mouse.position);
-    this.mouse.cellPos = this.calculateCellToPosition(this.mouse.cell);
-  }
-
   onMouseEnter(position, event) {
-    this.setMouse({ position });
+    this.#setMouse({ position });
     this.emitter.fire('onMouseEnter', this.mouse, event);
   }
   onMouseLeave(position, event) {
-    this.setMouse({ position });
+    this.#setMouse({ position });
     this.emitter.fire('onMouseLeave', this.mouse, event);
   }
   onMouseDown(position, event) {
-    this.setMouse({ position, offset: position, down: true });
+    this.#setMouse({ position, offset: position, down: true });
     this.emitter.fire('onMouseDown', this.mouse, event);
   }
   onMouseUp(position, event) {
-    this.setMouse({ position, offset: position, down: false });
+    this.#setMouse({ position, offset: position, down: false });
     this.emitter.fire('onMouseUp', this.mouse, event);
   }
   onMouseMove(position, event) {
-    this.setMouse({ position });
+    this.#setMouse({ position });
     this.emitter.fire('onMouseMove', this.mouse, event);
   }
 }
