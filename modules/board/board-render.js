@@ -17,6 +17,8 @@ class BoardRender {
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
   }
 
   get target() { return this.elements.get('board'); }
@@ -38,6 +40,8 @@ class BoardRender {
   handleMouseDown(event) { this.emitter.fire('handleMouseDown', event); }
   handleMouseUp(event) { this.emitter.fire('handleMouseUp', event); }
   handleMouseMove(event) { this.emitter.fire('handleMouseMove', event); }
+  handleMouseLeave(event) { this.emitter.fire('handleMouseLeave', event); }
+  handleMouseEnter(event) { this.emitter.fire('handleMouseEnter', event); }
 
   update() {
     const board = this.elements.get('board');
@@ -78,6 +82,8 @@ class BoardRender {
       this.elements.set('board', board);
 
       board.addEventListener('mousedown', this.handleMouseDown);
+      board.addEventListener('mouseleave', this.handleMouseLeave);
+      board.addEventListener('mouseenter', this.handleMouseEnter);
       window.addEventListener('mouseup', this.handleMouseUp);
       window.addEventListener('mousemove', this.handleMouseMove);
     }

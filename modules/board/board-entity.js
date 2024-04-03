@@ -22,16 +22,29 @@ class BoardEntity {
 
   get pixelSize() { return PIXEL_SIZE; }
 
+  isWithinBoard(pixel) {
+    const withinX = pixel.x >= 0 && pixel.x < this.grid.rows;
+    const withinY = pixel.y >= 0 && pixel.y < this.grid.cols;
+
+    return withinX && withinY;
+  }
+
   positionToPixel(position) {
     const pixel = {
       x: Math.floor(position.x / this.pixelSize),
       y: Math.floor(position.y / this.pixelSize),
     };
 
-    pixel.x = Math.min(this.grid.rows - 1, Math.max(0, pixel.x));
-    pixel.y = Math.min(this.grid.cols - 1, Math.max(0, pixel.y));
-
     return pixel;
+  }
+
+  pixelToPosition(pixel) {
+    const position = {
+      x: pixel.x * this.pixelSize,
+      y: pixel.y * this.pixelSize,
+    };
+
+    return position;
   }
 }
 
