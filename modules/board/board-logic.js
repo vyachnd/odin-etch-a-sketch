@@ -18,6 +18,7 @@ class BoardLogic {
 
   get cellSize() { return this._entity.grid.cellSize; }
   get emitter() { return this._entity.emitter; }
+  get position() { return this._entity.position; }
   get target() { return this._render.target; }
   get scale() { return this._render.scale; }
 
@@ -37,6 +38,8 @@ class BoardLogic {
 
   destroy() { this._render.destroy(); }
   render(parent) { this._render.render(parent); }
+
+  move(position) { this._entity.onMove(position); }
 
   handleMouseLeave(event) {
     const position = this.calculatePosition(event.clientX, event.clientY);

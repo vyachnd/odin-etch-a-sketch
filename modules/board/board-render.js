@@ -10,6 +10,7 @@ class BoardRender {
     this.parent = null;
     this.elements = new Map();
 
+    this.update = this.update.bind(this);
     this.updateDebounce = debounce(this.update.bind(this), 100);
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
@@ -17,6 +18,8 @@ class BoardRender {
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
+
+    this.emitter.on('onMove', this.update);
   }
 
   get emitter() { return this._entity.emitter; }

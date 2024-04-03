@@ -54,6 +54,11 @@ class BoardEntity {
     return false;
   }
 
+  onMove(position) {
+    this.position = Object.assign(this.position, position);
+    this.emitter.fire('onMove', position);
+  }
+
   onMouseEnter(position, event) {
     this.#setMouse({ position });
     this.emitter.fire('onMouseEnter', this.mouse, event);
