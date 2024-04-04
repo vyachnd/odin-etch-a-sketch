@@ -1,11 +1,26 @@
 
-import Emitter from '../../../libraries/emitter.js';
 
 class DragLogic {
-  constructor(entity, render) {
-    this.entity = entity;
-    this.render = render;
-    this.emitter = new Emitter();
+  constructor(entity) {
+    this._entity = entity;
+  }
+
+  get camera() { return this._entity.camera; }
+  get emitter() { return this._entity.emitter; }
+
+  get isEnabled() { return this._entity.enabled; }
+
+  enable() {
+    this.camera.setMoveable(true);
+    this._entity.enable();
+  }
+  disable() {
+    this.camera.setMoveable(false);
+    this._entity.disable();
+  }
+  toggle() {
+    this.camera.setMoveable(!this.isEnabled);
+    this._entity.toggle();
   }
 }
 
