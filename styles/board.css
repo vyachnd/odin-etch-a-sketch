@@ -1,8 +1,0 @@
-.board {
-  position: relative;
-}
-
-.board {
-  background-color: rgba(var(--color-zinc-800), 0.6);
-  border: 1px solid rgb(var(--color-zinc-700));
-}
