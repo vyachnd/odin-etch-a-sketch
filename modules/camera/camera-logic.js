@@ -1,81 +1,82 @@
-import Emitter from '../../libraries/emitter.js';
-
 class CameraLogic {
   constructor(entity, render) {
-    this.entity = entity;
-    this.render = render;
-    this.emitter = new Emitter();
+    this._entity = entity;
+    this._render = render;
 
-    this.mouse = {
-      offset: { x: 0, y: 0 },
-      down: false,
-    };
-
-    this.render.emitter.on('handleMouseDown', this.handleMouseDown.bind(this));
-    this.render.emitter.on('handleMouseUp', this.handleMouseUp.bind(this));
-    this.render.emitter.on('handleMouseMove', this.handleMouseMove.bind(this));
-    this.render.emitter.on('handleKeyDown', this.handleKeyDown.bind(this));
-    this.render.emitter.on('handleWheel', this.handleWheel.bind(this));
+    this.emitter.on('handleWheel', this.handleWheel.bind(this));
+    this.emitter.on('handleKeyDown', this.handleKeyDown.bind(this));
+    this.emitter.on('handleMouseDown', this.handleMouseDown.bind(this));
+    this.emitter.on('handleMouseUp', this.handleMouseUp.bind(this));
+    this.emitter.on('handleMouseMove', this.handleMouseMove.bind(this));
   }
 
-  get center() {
-    const cameraElement = this.render.elements.get('camera');
-    const cammeraScreenElement = this.render.elements.get('cameraScreen');
-    const cameraRect = cameraElement.getBoundingClientRect();
-    const cameraScreenRect = cammeraScreenElement.getBoundingClientRect();
+  get emitter() { return this._entity.emitter; }
+  get target() { return this._render.target; }
+  get cameraCenter() { return this._render.cameraCenter; }
+  get fieldCenter() { return this._render.fieldCenter; }
+
+  #isCtrlKey(event) {
+    const { ctrlKey, metaKey } = event;
+    return (ctrlKey || metaKey);
+  }
+
+  calculatePosition(clientX, clientY) {
+    const cameraRect = this.target.getBoundingClientRect();
+    const cameraPosition = this._entity.position;
 
     return {
-      x: Math.floor((cameraRect.width - cameraScreenRect.width) / 2) - this.entity.position.x,
-      y: Math.floor((cameraRect.height - cameraScreenRect.height) / 2) - this.entity.position.y,
+      x: clientX - cameraPosition.x - cameraRect.left,
+      y: clientY - cameraPosition.y - cameraRect.top,
     };
   }
 
-  zoom(value) { this.entity.setZoom(value); }
-  zoomIn() { this.entity.zoomIn(); }
-  zoomOut() { this.entity.zoomOut(); }
+  destroy() { this._render.destroy(); }
+  render(parent) { this._render.render(parent); }
 
-  move(position) { this.entity.move(position); }
+  addEntity(entity) { return this._entity.addEntity(entity); }
 
-  handleMouseDown(event) {
-    const cameraElement = this.render.elements.get('camera');
-    const cameraRect = cameraElement.getBoundingClientRect();
+  setZoom(value) { this._entity.setZoom(value); }
+  zoomIn() { this._entity.onZoomIn(); }
+  zoomOut() { this._entity.onZoomOut(); }
+  zoomReset() { this._entity.onZoomReset(); }
 
-    this.mouse.down = true;
-    this.mouse.offset = {
-      x: event.clientX - this.entity.position.x - cameraRect.left,
-      y: event.clientY - this.entity.position.y - cameraRect.top,
-    };
-  }
+  move(position) { this._entity.onMove(position); }
 
-  handleMouseUp() {
-    this.mouse.down = false;
-    this.mouse.offset = { x: 0, y: 0 };
-  }
-
-  handleMouseMove(event) {
-    if (this.mouse.down && this.entity.moveable) {
-      const position = {
-        x: event.clientX - this.mouse.offset.x,
-        y: event.clientY - this.mouse.offset.y,
-      };
-
-      this.move(position);
-    }
-  }
-
-  handleKeyDown(event) {
-    const { ctrlKey, metaKey, key } = event;
-
-    if ((ctrlKey || metaKey) && (key === '+' || key === '=')) this.zoomIn();
-    if ((ctrlKey || metaKey) && (key === '-')) this.zoomOut();
-    if ((ctrlKey || metaKey) && (key === '0')) this.zoom(1);
-  }
+  setMoveable(moveable) { this._entity.setMoveable(moveable); }
+  setZoomable(zoomable) { this._entity.setZoomable(zoomable); }
 
   handleWheel(event) {
-    const { ctrlKey, metaKey, deltaY } = event;
+    const position = this.calculatePosition(event.clientX, event.clientY);
+    this._entity.setMouse({ position, event });
 
-    if ((ctrlKey || metaKey) && deltaY < 0) this.zoomIn();
-    if ((ctrlKey || metaKey) && deltaY > 0) this.zoomOut();
+    if (this.#isCtrlKey(event) && event.deltaY < 0) this._entity.onZoomIn(event);
+    if (this.#isCtrlKey(event) && event.deltaY > 0) this._entity.onZoomOut(event);
+  }
+  handleKeyDown(event) {
+    if (this.#isCtrlKey(event) && (event.key === '+' || event.key === '=')) this._entity.onZoomIn(event);
+    if (this.#isCtrlKey(event) && (event.key === '-')) this._entity.onZoomOut(event);
+    if (this.#isCtrlKey(event) && (event.key === '0')) this._entity.onZoomReset(event);
+  }
+  handleMouseDown(event) {
+    const position = this.calculatePosition(event.clientX, event.clientY);
+    this._entity.onMouseDown(position, event);
+  }
+  handleMouseUp(event) {
+    const position = this.calculatePosition(event.clientX, event.clientY);
+    this._entity.onMouseUp(position, event);
+  }
+  handleMouseMove(event) {
+    event.preventDefault();
+
+    const position = this.calculatePosition(event.clientX, event.clientY);
+    this._entity.onMouseMove(position, event);
+
+    if (!this._entity.mouse.down || this._entity.mouse.button !== 0) return;
+
+    this._entity.onMove({
+      x: event.clientX - this._entity.mouse.offset.x,
+      y: event.clientY - this._entity.mouse.offset.y,
+    });
   }
 }
 

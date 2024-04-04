@@ -7,7 +7,7 @@ function Camera(options = {}) {
   const render = new CameraRender(entity, options.render);
   const logic = new CameraLogic(entity, render, options.logic);
 
-  return { entity, render, logic };
+  return logic;
 }
 
 export default Camera;
