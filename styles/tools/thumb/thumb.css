@@ -1,0 +1,7 @@
+.thumb {
+  background-color: rgba(var(--color-zinc-50), 0.08);
+  outline: 1px solid rgba(var(--color-zinc-50), 0.6);
+  position: absolute;
+  z-index: 10000;
+  pointer-events: none;
+}
