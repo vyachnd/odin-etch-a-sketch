@@ -5,13 +5,8 @@ class GridEntity {
   constructor(board) {
     this.board = board;
     this.position = { x: 0, y: 0 };
-    this.enabled = false;
-    this.showed = false;
     this.emitter = new Emitter();
   }
-
-  get size() { return this.board.cellSize; }
-  get scale() { return this.board.scale; }
 
   move(position) {
     this.position = Object.assign(this.position, position);
@@ -29,15 +24,6 @@ class GridEntity {
   toggle() {
     this.enabled = !this.enabled;
     this.emitter.fire('toggle', this.enabled);
-  }
-
-  show() {
-    this.showed = true;
-    this.emitter.fire('show');
-  }
-  hide() {
-    this.showed = false;
-    this.emitter.fire('hide');
   }
 }
 
