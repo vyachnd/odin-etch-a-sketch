@@ -8,6 +8,7 @@
 
 /* Tools */
 @import './tools/thumb/thumb.css';
+@import './tools/grid/grid.css';
 
 * {
   color: rgb(var(--color-zinc-50));

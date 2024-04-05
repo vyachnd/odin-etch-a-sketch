@@ -19,6 +19,7 @@ class BoardLogic {
   get cellSize() { return this._entity.grid.cellSize; }
   get emitter() { return this._entity.emitter; }
   get position() { return this._entity.position; }
+  get grid() { return this._entity.grid; }
   get target() { return this._render.target; }
   get scale() { return this._render.scale; }
 

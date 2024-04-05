@@ -1,0 +1,23 @@
+.grid {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  inset: 0;
+}
+
+.grid .grid__line {
+  background-color: red;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.grid .grid__line {
+  width: 100%;
+  height: 1px;
+}
+
+.grid .grid__line[data-ver] {
+  width: 1px;
+  height: 100%;
+}
