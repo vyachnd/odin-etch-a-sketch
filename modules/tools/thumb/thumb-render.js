@@ -45,8 +45,8 @@ class ThumbRender {
     if (thumb.classList.length > 0) thumb.className = '';
     thumb.classList.add('thumb', ...this.options.cls);
 
-    thumb.style.width = `${size}px`;
-    thumb.style.height = `${size}px`;
+    thumb.style.width = `${size + 1}px`;
+    thumb.style.height = `${size + 1}px`;
     thumb.style.transform = `scale(${scale})`;
 
     thumb.style.top = `${position.y}px`;
