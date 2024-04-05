@@ -10,7 +10,7 @@ class ThumbEntity {
     this.emitter = new Emitter();
   }
 
-  get size() { return this.board.cellSize; }
+  get size() { return this.board.grid.cellSize; }
   get scale() { return this.board.scale; }
 
   move(position) {

@@ -16,7 +16,6 @@ class BoardLogic {
     this.emitter.on('handleMouseMove', this.handleMouseMove);
   }
 
-  get cellSize() { return this._entity.grid.cellSize; }
   get emitter() { return this._entity.emitter; }
   get position() { return this._entity.position; }
   get grid() { return this._entity.grid; }
