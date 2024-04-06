@@ -10,6 +10,8 @@ function getUniqueId(len) {
   return len;
 }
 
+function minmax(value, min, max) { return Math.min(Math.max(value, min), max); }
+
 function randomRange(from, to) {
   return Math.random() * (to - from) + from;
 }
@@ -20,8 +22,14 @@ function rgbaToHex(rgba) {
   return `#${hex}`;
 }
 
+function objectsEqual(obj1, obj2) {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
+
 export {
   getUniqueId,
+  minmax,
   randomRange,
   rgbaToHex,
+  objectsEqual,
 };
