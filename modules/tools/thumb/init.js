@@ -4,7 +4,7 @@ import ToolThumb from './thumb.js';
 function toolThumbInit(board) {
   const toolThumb = new ToolThumb(board);
   const toolThumbBtn = new CustomButton({
-    icon: 'brush',
+    icon: 'target',
     iconOnly: true,
     variant: null,
     fill: false,
