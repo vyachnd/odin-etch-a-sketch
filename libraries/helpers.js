@@ -22,7 +22,7 @@ function rgbaToHex(rgba) {
   const b = Math.round(rgba.b);
   const a = Math.round(rgba.a * 255);
 
-  const hex = ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1) + ((1 << 8) + Math.round(a * 255)).toString(16).slice(1);
+  const hex = ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1) + ((1 << 8) + a).toString(16).slice(1);
 
   return `#${hex}`.toUpperCase();
 }
