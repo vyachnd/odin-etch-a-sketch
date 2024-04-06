@@ -1,5 +1,13 @@
-function getUniqueId() {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+function getUniqueId(len) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let uniqueId = '';
+
+  for (let i = 0; i < len || 12; i += 1) {
+    const rndIdx = Math.floor(Math.random() * chars.length);
+    uniqueId += chars[rndIdx];
+  }
+
+  return len;
 }
 
 function randomRange(from, to) {
