@@ -17,9 +17,14 @@ function randomRange(from, to) {
 }
 
 function rgbaToHex(rgba) {
-  const { r, g, b, a } = rgba;
-  const hex = ((1 << 24) + (Math.round(r * 255) << 16) + (Math.round(g * 255) << 8) + Math.round(b * 255)).toString(16).slice(1);
-  return `#${hex}`;
+  const r = Math.round(rgba.r);
+  const g = Math.round(rgba.g);
+  const b = Math.round(rgba.b);
+  const a = Math.round(rgba.a * 255);
+
+  const hex = ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1) + ((1 << 8) + Math.round(a * 255)).toString(16).slice(1);
+
+  return `#${hex}`.toUpperCase();
 }
 
 function objectsEqual(obj1, obj2) {
