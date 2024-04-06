@@ -47,6 +47,18 @@ class BoardEntity {
     };
   }
 
+  addCell(position, color) {
+    if (this.isMouseOut(position)) return;
+
+    const cell = this.calculatePositionToCell(position);
+
+    if (this.cells.has(`${cell.x}-${cell.y}`)) return;
+
+    this.cells.set(`${cell.x}-${cell.y}`, { position, color });
+
+    this.emitter.fire('addCell', { position, color });
+  }
+
   isMouseOut(position) {
     if (position.x < 0 || position.y < 0) return true;
     if (position.x >= this.size.width || position.y >= this.size.height) return true;

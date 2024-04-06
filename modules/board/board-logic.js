@@ -40,6 +40,7 @@ class BoardLogic {
   render(parent) { this._render.render(parent); }
 
   move(position) { this._entity.onMove(position); }
+  addCell(position, color) { this._entity.addCell(position, color); }
 
   handleMouseLeave(event) {
     const position = this.calculatePosition(event.clientX, event.clientY);

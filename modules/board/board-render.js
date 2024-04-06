@@ -1,4 +1,5 @@
 import debounce from '../../../libraries/debounce.js';
+import { rgbaToHex } from '../../libraries/helpers.js';
 
 class BoardRender {
   constructor(entity, options) {
@@ -19,6 +20,7 @@ class BoardRender {
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
 
+    this.emitter.on('addCell', this.#updateCells.bind(this));
     this.emitter.on('onMove', this.update);
   }
 
@@ -44,6 +46,29 @@ class BoardRender {
   handleMouseUp(event) { this.emitter.fire('handleMouseUp', event); }
   handleMouseMove(event) { this.emitter.fire('handleMouseMove', event); }
 
+  #updateCells() {
+    const cellContainer = this.elements.get('cellContainer');
+
+    const { cellSize } = this._entity.grid;
+    const cells = this._entity.cells;
+    cellContainer.innerHTML = '';
+
+    cells.forEach(({ position, color }) => {
+      const cell = document.createElement('div');
+      cell.classList.add('board__cell');
+
+      const pos = this._entity.calculateCellToPosition(this._entity.calculatePositionToCell(position));
+
+      cell.style.backgroundColor = rgbaToHex(color);
+      cell.style.width = `${cellSize}px`;
+      cell.style.height = `${cellSize}px`;
+      cell.style.left = `${pos.x}px`;
+      cell.style.top = `${pos.y}px`;
+
+      cellContainer.append(cell);
+    });
+  }
+
   update() {
     const board = this.elements.get('board');
 
@@ -60,6 +85,8 @@ class BoardRender {
 
     board.style.top = `${y}px`;
     board.style.left = `${x}px`;
+
+    this.#updateCells();
   }
 
   destroy() {
@@ -81,6 +108,12 @@ class BoardRender {
     if (!board) {
       board = document.createElement('div');
       this.elements.set('board', board);
+
+      const cellContainer = document.createElement('div');
+      cellContainer.classList.add('board__cell-container');
+      this.elements.set('cellContainer', cellContainer);
+
+      board.append(cellContainer);
 
       board.addEventListener('mouseleave', this.handleMouseLeave);
       board.addEventListener('mouseenter', this.handleMouseEnter);
