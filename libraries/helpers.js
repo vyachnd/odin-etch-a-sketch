@@ -1,13 +1,13 @@
-function getUniqueId(len) {
+function getUniqueId(len = 12) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let uniqueId = '';
 
-  for (let i = 0; i < len || 12; i += 1) {
+  for (let i = 0; i < len; i += 1) {
     const rndIdx = Math.floor(Math.random() * chars.length);
     uniqueId += chars[rndIdx];
   }
 
-  return len;
+  return uniqueId;
 }
 
 function minmax(value, min, max) { return Math.min(Math.max(value, min), max); }
