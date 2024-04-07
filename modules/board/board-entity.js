@@ -1,4 +1,5 @@
 import Emitter from '../../libraries/emitter.js';
+import { objectsEqual } from '../../libraries/helpers.js';
 
 class BoardEntity {
   constructor(options) {
@@ -35,6 +36,19 @@ class BoardEntity {
     this.mouse.cellPos = this.calculateCellToPosition(this.mouse.cell);
   }
 
+  #cellKeyFormat(cell) { return `${cell.x}-${cell.y}`; }
+
+  #createCell(position, color) {
+    if (this.isOut(position)) return;
+
+    const cell = this.calculatePositionToCell(position);
+    const cellKey = this.#cellKeyFormat(cell);
+
+    if (this.cells.has(cellKey)) return;
+
+    this.cells.set(cellKey, { position, color });
+  }
+
   calculatePositionToCell(position) {
     return {
       x: Math.floor(position.x / this.grid.cellSize),
@@ -48,23 +62,79 @@ class BoardEntity {
     };
   }
 
-  addCell(position, color) {
-    if (this.isOut(position)) return;
-
-    const cell = this.calculatePositionToCell(position);
-
-    if (this.cells.has(`${cell.x}-${cell.y}`)) return;
-
-    this.cells.set(`${cell.x}-${cell.y}`, { position, color });
-
-    this.emitter.fire('addCell', { position, color });
-  }
-
   isOut(position) {
     if (position.x < 0 || position.y < 0) return true;
     if (position.x >= this.size.width || position.y >= this.size.height) return true;
 
     return false;
+  }
+
+  getCellNeighbors(cellPos) {
+    const neighbors = [
+      { x: cellPos.x, y: cellPos.y - 1 },
+      { x: cellPos.x + 1, y: cellPos.y },
+      { x: cellPos.x, y: cellPos.y + 1 },
+      { x: cellPos.x - 1, y: cellPos.y },
+    ];
+
+    return neighbors.filter((neighbor) => !this.isOut(this.calculateCellToPosition(neighbor)));
+  }
+
+  getCellsFrom(cellPos) {
+    const targetCellKey = this.#cellKeyFormat(cellPos);
+    const targetCell = this.cells.get(targetCellKey);
+    const findedCells = new Map();
+
+    findedCells.set(targetCellKey, cellPos);
+
+    const tempFinded = [findedCells.get(targetCellKey)];
+
+    while (tempFinded.length > 0) {
+      const tempCell = tempFinded.shift();
+      const tempNeighbors = this.getCellNeighbors(tempCell);
+
+      for (const tempNeighbor of tempNeighbors) {
+        const tempNeighborKey = this.#cellKeyFormat(tempNeighbor);
+        const tempNeighborCell = this.cells.get(tempNeighborKey);
+
+        if (this.isOut(this.calculateCellToPosition(tempNeighbor))) continue;
+        if (findedCells.has(tempNeighborKey)) continue;
+
+        if (
+          (!targetCell && !tempNeighborCell)
+          || ((targetCell && tempNeighborCell) && objectsEqual(targetCell.color, tempNeighborCell.color))
+        ) {
+          tempFinded.push(tempNeighbor);
+          findedCells.set(tempNeighborKey, tempNeighbor);
+        }
+      }
+    }
+
+    return findedCells;
+  }
+
+  onBrush(position, color) {
+    if (this.isOut(position)) return;
+
+    this.#createCell(position, color);
+    this.emitter.fire('onBrush', { position, color });
+  }
+
+  onFill(position, color) {
+    if (this.isOut(position)) return;
+
+    const cells = this.getCellsFrom(this.calculatePositionToCell(position));
+    cells.forEach((cell) => {
+      const targetCell = this.cells.get(this.#cellKeyFormat(cell));
+
+      if (targetCell) {
+        targetCell.color = color;
+      } else {
+        this.#createCell(this.calculateCellToPosition(cell), color);
+      }
+    });
+
+    this.emitter.fire('onFill', cells, position, color);
   }
 
   onMove(position) {

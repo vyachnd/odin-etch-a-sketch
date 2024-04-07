@@ -33,14 +33,15 @@ class BoardLogic {
   }
   posToCell(position) { return this._entity.calculatePositionToCell(position); }
   cellToPos(cell) { return this._entity.calculateCellToPosition(cell); }
-
   isOut(position) { return this._entity.isOut(position); }
+  getCellNeighbors(cellPos) { return this._entity.getCellNeighbors(cellPos); }
+  getCellsFrom(cellPos) { return this._entity.getCellsFrom(cellPos); }
+  brush(position, color) { this._entity.onBrush(position, color); }
+  fill(position, color) { this._entity.onFill(position, color); }
+  move(position) { this._entity.onMove(position); }
 
   destroy() { this._render.destroy(); }
   render(parent) { this._render.render(parent); }
-
-  move(position) { this._entity.onMove(position); }
-  addCell(position, color) { this._entity.addCell(position, color); }
 
   handleMouseLeave(event) {
     const position = this.calculatePosition(event.clientX, event.clientY);

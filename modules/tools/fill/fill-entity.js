@@ -1,10 +1,10 @@
 
 import Emitter from '../../../libraries/emitter.js';
 
-class BrushEntity {
+class FillEntity {
   constructor(board) {
     this.board = board;
-    this.color = { r: 0, g: 0, b: 0, a: 1 };
+    this.color = { r: 255, g: 0, b: 0, a: 1 };
     this.enabled = false;
     this.emitter = new Emitter();
   }
@@ -22,12 +22,12 @@ class BrushEntity {
     this.emitter.fire('toggle', this.enabled);
   }
 
-  onBrush(position, event) {
+  onFill(position) {
     if (!this.enabled) return;
 
-    this.board.brush(position, this.color);
+    this.board.fill(position, this.color);
     this.emitter.fire('onBrush', position, this.color, event);
   }
 }
 
-export default BrushEntity;
+export default FillEntity;
