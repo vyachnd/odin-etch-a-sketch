@@ -1,13 +1,11 @@
-import ThumbEntity from './brush-entity.js';
-import ThumbLogic from './brush-logic.js';
-import ThumbRender from './brush-render.js';
+import BrushEntity from './brush-entity.js';
+import BrushLogic from './brush-logic.js';
 
-function ToolThumb(board, options = {}) {
-  const entity = new ThumbEntity(board, options.entity);
-  const render = new ThumbRender(entity, options.render);
-  const logic = new ThumbLogic(entity, render, options.logic);
+function ToolBrush(board, options = {}) {
+  const entity = new BrushEntity(board, options.entity);
+  const logic = new BrushLogic(entity, options.logic);
 
   return logic;
 }
 
-export default ToolThumb;
+export default ToolBrush;

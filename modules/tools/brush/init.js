@@ -11,8 +11,6 @@ function toolBrushInit(board) {
   });
 
   function onEnable() {
-    if (!toolBrush.target) toolBrush.render(board.target);
-
     toolBrushBtn.setVariant('secondary');
     toolBrushBtn.setFill(true);
   }
