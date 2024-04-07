@@ -1,8 +1,8 @@
 import CustomButton from '../../custom-elements/button/button.js';
 import ToolFill from './fill.js';
 
-function toolFillInit(board) {
-  const toolFill = new ToolFill(board);
+function toolFillInit(board, toolColor) {
+  const toolFill = new ToolFill(board, toolColor);
   const toolFillBtn = new CustomButton({
     icon: 'colors',
     iconOnly: true,

@@ -1,8 +1,8 @@
 import CustomButton from '../../custom-elements/button/button.js';
 import ToolBrush from './brush.js';
 
-function toolBrushInit(board) {
-  const toolBrush = new ToolBrush(board);
+function toolBrushInit(board, toolColor) {
+  const toolBrush = new ToolBrush(board, toolColor);
   const toolBrushBtn = new CustomButton({
     icon: 'brush',
     iconOnly: true,

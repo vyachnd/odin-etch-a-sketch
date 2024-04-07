@@ -2,9 +2,9 @@
 import Emitter from '../../../libraries/emitter.js';
 
 class FillEntity {
-  constructor(board) {
+  constructor(board, toolColor) {
     this.board = board;
-    this.color = { r: 255, g: 0, b: 0, a: 1 };
+    this.toolColor = toolColor;
     this.enabled = false;
     this.emitter = new Emitter();
   }
@@ -25,8 +25,8 @@ class FillEntity {
   onFill(position) {
     if (!this.enabled) return;
 
-    this.board.fill(position, this.color);
-    this.emitter.fire('onBrush', position, this.color, event);
+    this.board.fill(position, this.toolColor.color);
+    this.emitter.fire('onBrush', position, this.toolColor.color);
   }
 }
 

@@ -27,6 +27,18 @@ function rgbaToHex(rgba) {
   return `#${hex}`.toUpperCase();
 }
 
+function hexToRgba(hex) {
+  const hexClr = hex.replace('#', '');
+  const rgba = {
+    r: parseInt(hexClr.slice(0, 2), 16),
+    g: parseInt(hexClr.slice(2, 4), 16),
+    b: parseInt(hexClr.slice(4, 6), 16),
+    a: +(parseInt(hexClr.slice(6, 16) || 'ff', 16) / 255).toFixed(2),
+  };
+
+  return rgba;
+}
+
 function objectsEqual(obj1, obj2) {
   return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
@@ -36,5 +48,6 @@ export {
   minmax,
   randomRange,
   rgbaToHex,
+  hexToRgba,
   objectsEqual,
 };

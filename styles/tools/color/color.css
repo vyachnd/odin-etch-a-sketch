@@ -1,0 +1,17 @@
+.color-tool {
+  position: relative;
+}
+
+.color-tool .color-tool__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.color-tool .color-tool__button .button__icon {
+  filter: drop-shadow(0 0 1px rgba(var(--color-zinc-50), 1));
+}
