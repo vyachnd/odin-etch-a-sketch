@@ -27,7 +27,7 @@ class BoardEntity {
   }
 
   #setMouse(mouse) {
-    const isOut = this.isMouseOut(mouse.position || this.mouse.position);
+    const isOut = this.isOut(mouse.position || this.mouse.position);
 
     this.mouse = { ...this.mouse, ...mouse, isOut };
 
@@ -49,7 +49,7 @@ class BoardEntity {
   }
 
   addCell(position, color) {
-    if (this.isMouseOut(position)) return;
+    if (this.isOut(position)) return;
 
     const cell = this.calculatePositionToCell(position);
 
@@ -60,7 +60,7 @@ class BoardEntity {
     this.emitter.fire('addCell', { position, color });
   }
 
-  isMouseOut(position) {
+  isOut(position) {
     if (position.x < 0 || position.y < 0) return true;
     if (position.x >= this.size.width || position.y >= this.size.height) return true;
 

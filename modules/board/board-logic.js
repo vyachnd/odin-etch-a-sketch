@@ -34,7 +34,7 @@ class BoardLogic {
   posToCell(position) { return this._entity.calculatePositionToCell(position); }
   cellToPos(cell) { return this._entity.calculateCellToPosition(cell); }
 
-  isMouseOut(position) { return this._entity.isMouseOut(position); }
+  isOut(position) { return this._entity.isOut(position); }
 
   destroy() { this._render.destroy(); }
   render(parent) { this._render.render(parent); }

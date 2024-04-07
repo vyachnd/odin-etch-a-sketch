@@ -30,7 +30,7 @@ class ThumbLogic {
   handleMouseEnter() { if (this.isEnabled) this.show(); }
   handleMouseMove(data) {
     if (!this.isEnabled) return;
-    if (this.board.isMouseOut(data.position)) return;
+    if (this.board.isOut(data.position)) return;
 
     if (!this.isShowed) this.show();
 
