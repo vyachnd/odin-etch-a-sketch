@@ -113,6 +113,19 @@ class BoardEntity {
     return findedCells;
   }
 
+  onErase(position) {
+    if (this.isOut(position)) return;
+
+    const cellKey = this.#cellKeyFormat(this.calculatePositionToCell(position));
+    const targetCell = this.cells.get(cellKey);
+
+    if (!targetCell) return;
+
+    this.cells.delete(cellKey);
+
+    this.emitter.fire('onErase', position);
+  }
+
   onBrush(position, color) {
     if (this.isOut(position)) return;
 
