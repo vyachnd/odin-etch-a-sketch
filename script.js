@@ -6,7 +6,7 @@
     - [ ] Shading tool
     - [ ] Lighting tool
     - [x] Color selector tool
-    - [ ] Background color selector tool
+    - [x] Background color selector tool
     - [ ] Rainbow color tool
     - [ ] Grid size change tool
 
@@ -29,6 +29,7 @@ import CustomIcon from './modules/custom-elements/icon/icon.js';
 import Plate from './modules/plate.js';
 
 // Tools
+import { rgbaToHex } from './libraries/helpers.js';
 import toolBrushInit from './modules/tools/brush/init.js';
 import toolColorInit from './modules/tools/color/init.js';
 import toolDragInit from './modules/tools/drag/init.js';
@@ -59,6 +60,7 @@ function initApp() {
 
   // Tools
   const { toolColor, toolColorBtn } = new toolColorInit(board);
+  const { toolColor: toolColorBg, toolColorBtn: toolColorBgBtn } = new toolColorInit(board);
 
   const { toolDrag, toolDragBtn } = new toolDragInit(camera);
   const { toolThumb, toolThumbBtn } = new toolThumbInit(board);
@@ -73,6 +75,14 @@ function initApp() {
   toolBrush.enable();
   toolFill.enable();
   toolEraser.enable();
+
+  toolColorBg.emitter.on('onChange', (rgba) => changeBoardColor(rgba));
+
+  // Change board background color
+  function changeBoardColor(rgba) {
+    board.target.style.backgroundColor = rgbaToHex(Object.assign({}, rgba, { a: 0.24 }));
+  }
+  toolColorBg.change({ r: 24, g: 24, b: 27 });
 
   // Header
   const headerElement = new CustomHeader({
@@ -96,6 +106,7 @@ function initApp() {
   toolbarElement.addElement(toolFillBtn, 'toolFillBtn');
   toolbarElement.addElement(toolEraserBtn, 'toolEraserBtn');
   toolbarElement.addElement(toolColorBtn, 'toolColorBtn');
+  toolbarElement.addElement(toolColorBgBtn, 'toolColorBgBtn');
 }
 
 unzoom(window);
