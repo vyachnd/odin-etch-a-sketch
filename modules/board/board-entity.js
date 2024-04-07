@@ -116,7 +116,14 @@ class BoardEntity {
   onBrush(position, color) {
     if (this.isOut(position)) return;
 
-    this.#createCell(position, color);
+    const targetCell = this.cells.get(this.#cellKeyFormat(this.calculatePositionToCell(position)));
+
+    if (targetCell) {
+      targetCell.color = color;
+    } else {
+      this.#createCell(position, color);
+    }
+
     this.emitter.fire('onBrush', { position, color });
   }
 
