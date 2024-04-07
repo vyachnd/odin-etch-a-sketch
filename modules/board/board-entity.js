@@ -11,6 +11,7 @@ class BoardEntity {
     this.mouse = {
       position: { x: 0, y: 0 },
       offset: { x: 0, y: 0 },
+      button: null,
       down: false,
       isOut: false,
     };
@@ -80,11 +81,11 @@ class BoardEntity {
     this.emitter.fire('onMouseLeave', this.mouse, event);
   }
   onMouseDown(position, event) {
-    this.#setMouse({ position, offset: position, down: true });
+    this.#setMouse({ position, offset: position, button: event.button, down: true });
     this.emitter.fire('onMouseDown', this.mouse, event);
   }
   onMouseUp(position, event) {
-    this.#setMouse({ position, offset: position, down: false });
+    this.#setMouse({ position, offset: position, button: null, down: false });
     this.emitter.fire('onMouseUp', this.mouse, event);
   }
   onMouseMove(position, event) {

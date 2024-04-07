@@ -23,12 +23,14 @@ class BrushLogic {
 
   handleMouseDown(data, event) {
     if (!this.isEnabled) return;
+    if (data.button !== 0) return;
 
     this._entity.onBrush(data.position, event);
   }
   handleMouseMove(data, event) {
     if (!this.isEnabled) return;
     if (!data.down) return;
+    if (data.button !== 0) return;
 
     this._entity.onBrush(data.position, event);
   }
