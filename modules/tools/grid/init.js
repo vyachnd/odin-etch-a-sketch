@@ -10,8 +10,6 @@ function toolGridInit(board) {
     fill: false,
   });
 
-  board.target.style.backgroundColor = 'rgba(248, 250, 252, 0.024)';
-
   function onEnable() {
     if (!toolGrid.target) toolGrid.render(board.target);
 
