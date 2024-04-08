@@ -3,8 +3,8 @@ import CustomButton from '../../custom-elements/button/button.js';
 import ToolColor from './color.js';
 
 function toolColorInit(board) {
-  const toolColor = new ToolColor(board);
-  const toolColorBtn = new CustomButton({
+  const tool = new ToolColor(board);
+  const button = new CustomButton({
     icon: 'circle',
     iconOnly: true,
     variant: null,
@@ -13,9 +13,9 @@ function toolColorInit(board) {
   });
 
   function chagneBtnColor(hex) {
-    if (!toolColorBtn.target) return;
+    if (!button.target) return;
 
-    toolColorBtn.target.style.color = hex;
+    button.target.style.color = hex;
   }
 
   const colorContainer = document.createElement('div');
@@ -28,26 +28,26 @@ function toolColorInit(board) {
   colorContainer.append(colorSelector);
 
   colorContainer.render = (parent) => {
-    toolColorBtn.render(colorContainer);
+    button.render(colorContainer);
     parent.append(colorContainer);
 
-    chagneBtnColor(rgbaToHex(toolColor.color));
+    chagneBtnColor(rgbaToHex(tool.color));
   };
 
   colorSelector.addEventListener('input', (event) => {
-    toolColor.change(hexToRgba(event.target.value));
+    tool.change(hexToRgba(event.target.value));
     chagneBtnColor(event.target.value);
   });
 
-  toolColor.emitter.on('onChange', (rgba) => {
+  tool.emitter.on('onChange', (rgba) => {
     const hex = rgbaToHex(rgba);
 
     colorSelector.value = hex.slice(0, 7);
     chagneBtnColor(hex);
   });
-  toolColorBtn.emitter.on('handleClick', () => colorSelector.click());
+  button.emitter.on('handleClick', () => colorSelector.click());
 
-  return { toolColor, toolColorBtn: colorContainer };
+  return { tool, button: colorContainer };
 }
 
 export default toolColorInit;

@@ -2,10 +2,10 @@
 import Emitter from '../../../libraries/emitter.js';
 
 class BrushEntity {
-  constructor(board, toolColor) {
+  constructor(board) {
     this.board = board;
-    this.toolColor = toolColor,
-      this.enabled = false;
+    this.color = { r: 255, g: 255, b: 255, a: 1 };
+    this.enabled = false;
     this.emitter = new Emitter();
   }
 
@@ -20,6 +20,11 @@ class BrushEntity {
   toggle() {
     this.enabled = !this.enabled;
     this.emitter.fire('toggle', this.enabled);
+  }
+
+  setColor(rgba) {
+    this.color = Object.assign(this.color, rgba);
+    this.emitter.fire('setColor', this.color);
   }
 
   onBrush(position, event) {

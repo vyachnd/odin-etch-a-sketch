@@ -16,6 +16,8 @@ class FillLogic {
   disable() { this._entity.disable(); }
   toggle() { this._entity.toggle(); }
 
+  setColor(rgba) { this._entity.setColor(rgba); }
+
   handleMouseDown(data, event) {
     if (!this.isEnabled) return;
     if (data.button !== 0) return;

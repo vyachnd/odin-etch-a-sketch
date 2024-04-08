@@ -2,8 +2,8 @@ import CustomButton from '../../custom-elements/button/button.js';
 import ToolGrid from './grid.js';
 
 function toolGridInit(board) {
-  const toolGrid = new ToolGrid(board);
-  const toolGridBtn = new CustomButton({
+  const tool = new ToolGrid(board);
+  const button = new CustomButton({
     icon: 'grid_4x4',
     iconOnly: true,
     variant: null,
@@ -11,28 +11,28 @@ function toolGridInit(board) {
   });
 
   function onEnable() {
-    if (!toolGrid.target) toolGrid.render(board.target);
+    if (!tool.target) tool.render(board.target);
 
-    toolGridBtn.setVariant('secondary');
-    toolGridBtn.setFill(true);
-    toolGridBtn.setTransparent(true);
+    button.setVariant('secondary');
+    button.setFill(true);
+    button.setTransparent(true);
   }
 
   function onDisable() {
-    toolGridBtn.setVariant(null);
-    toolGridBtn.setFill(false);
+    button.setVariant(null);
+    button.setFill(false);
   }
 
-  toolGrid.emitter.on('enable', onEnable);
-  toolGrid.emitter.on('disable', onDisable);
-  toolGrid.emitter.on('toggle', (value) => {
+  tool.emitter.on('enable', onEnable);
+  tool.emitter.on('disable', onDisable);
+  tool.emitter.on('toggle', (value) => {
     if (value) onEnable();
     if (!value) onDisable();
   });
 
-  toolGridBtn.emitter.on('handleClick', () => toolGrid.toggle());
+  button.emitter.on('handleClick', () => tool.toggle());
 
-  return { toolGrid, toolGridBtn };
+  return { tool, button };
 }
 
 export default toolGridInit;

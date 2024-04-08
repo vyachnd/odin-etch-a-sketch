@@ -60,25 +60,23 @@ function initApp() {
   camera.move(camera.fieldCenter);
 
   // Tools
-  const { toolColor, toolColorBtn } = new toolColorInit(board);
-  const { toolColor: toolColorBg, toolColorBtn: toolColorBgBtn } = new toolColorInit(board);
-
-  const { toolDrag, toolDragBtn } = new toolDragInit(camera);
-  const { toolThumb, toolThumbBtn } = new toolThumbInit(board);
-  const { toolGrid, toolGridBtn } = new toolGridInit(board);
-  const { toolBrush, toolBrushBtn } = new toolBrushInit(board, toolColor);
-  const { toolFill, toolFillBtn } = new toolFillInit(board, toolColor);
-  const { toolEraser, toolEraserBtn } = new toolEraserInit(board);
+  const brushColorTool = new toolColorInit(board);
+  const bgColorTool = new toolColorInit(board);
+  const dragTool = new toolDragInit(camera);
+  const thumbTool = new toolThumbInit(board);
+  const gridTool = new toolGridInit(board);
+  const brushTool = new toolBrushInit(board);
+  const fillTool = new toolFillInit(board);
+  const eraserTool = new toolEraserInit(board);
   const shadingTool = new toolAdjustColorInit(board);
   const lightingTool = new toolAdjustColorInit(board);
 
-  toolDrag.disable();
-  toolThumb.enable();
-  toolGrid.enable();
-  toolBrush.enable();
-  toolFill.enable();
-  toolEraser.enable();
-
+  dragTool.tool.disable();
+  thumbTool.tool.enable();
+  gridTool.tool.enable();
+  brushTool.tool.enable();
+  fillTool.tool.enable();
+  eraserTool.tool.enable();
 
   shadingTool.tool.enable();
   shadingTool.tool.setFactor(-10);
@@ -88,13 +86,17 @@ function initApp() {
   lightingTool.tool.setFactor(10);
   lightingTool.button.setIcon('ev_shadow_add');
 
-  toolColorBg.emitter.on('onChange', (rgba) => changeBoardColor(rgba));
+  brushColorTool.tool.emitter.on('onChange', (rgba) => {
+    brushTool.tool.setColor(rgba);
+    fillTool.tool.setColor(rgba);
+  });
+  bgColorTool.tool.emitter.on('onChange', (rgba) => changeBoardColor(rgba));
 
   // Change board background color
   function changeBoardColor(rgba) {
     board.target.style.backgroundColor = rgbaToHex(Object.assign({}, rgba, { a: 0.24 }));
   }
-  toolColorBg.change({ r: 24, g: 24, b: 27 });
+  bgColorTool.tool.change({ r: 24, g: 24, b: 27 });
 
   // Header
   const headerElement = new CustomHeader({
@@ -111,14 +113,14 @@ function initApp() {
     cls: ['top', 'center'],
   });
   toolbarElement.render(appElement);
-  toolbarElement.addElement(toolDragBtn, 'toolDragBtn');
-  toolbarElement.addElement(toolThumbBtn, 'toolThumbBtn');
-  toolbarElement.addElement(toolGridBtn, 'toolGridBtn');
-  toolbarElement.addElement(toolBrushBtn, 'toolBrushBtn');
-  toolbarElement.addElement(toolFillBtn, 'toolFillBtn');
-  toolbarElement.addElement(toolEraserBtn, 'toolEraserBtn');
-  toolbarElement.addElement(toolColorBtn, 'toolColorBtn');
-  toolbarElement.addElement(toolColorBgBtn, 'toolColorBgBtn');
+  toolbarElement.addElement(dragTool.button, 'dragTool');
+  toolbarElement.addElement(thumbTool.button, 'thumbTool');
+  toolbarElement.addElement(gridTool.button, 'gridTool');
+  toolbarElement.addElement(brushTool.button, 'brushTool');
+  toolbarElement.addElement(fillTool.button, 'fillTool');
+  toolbarElement.addElement(eraserTool.button, 'eraserTool');
+  toolbarElement.addElement(brushColorTool.button, 'brushColorTool');
+  toolbarElement.addElement(bgColorTool.button, 'bgColorTool');
 
   toolbarElement.addElement(shadingTool.button, 'shadingTool');
   toolbarElement.addElement(lightingTool.button, 'lightingTool');

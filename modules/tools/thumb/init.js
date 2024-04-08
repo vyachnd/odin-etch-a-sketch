@@ -2,8 +2,8 @@ import CustomButton from '../../custom-elements/button/button.js';
 import ToolThumb from './thumb.js';
 
 function toolThumbInit(board) {
-  const toolThumb = new ToolThumb(board);
-  const toolThumbBtn = new CustomButton({
+  const tool = new ToolThumb(board);
+  const button = new CustomButton({
     icon: 'target',
     iconOnly: true,
     variant: null,
@@ -11,27 +11,27 @@ function toolThumbInit(board) {
   });
 
   function onEnable() {
-    if (!toolThumb.target) toolThumb.render(board.target);
+    if (!tool.target) tool.render(board.target);
 
-    toolThumbBtn.setVariant('secondary');
-    toolThumbBtn.setFill(true);
+    button.setVariant('secondary');
+    button.setFill(true);
   }
 
   function onDisable() {
-    toolThumbBtn.setVariant(null);
-    toolThumbBtn.setFill(false);
+    button.setVariant(null);
+    button.setFill(false);
   }
 
-  toolThumb.emitter.on('enable', onEnable);
-  toolThumb.emitter.on('disable', onDisable);
-  toolThumb.emitter.on('toggle', (value) => {
+  tool.emitter.on('enable', onEnable);
+  tool.emitter.on('disable', onDisable);
+  tool.emitter.on('toggle', (value) => {
     if (value) onEnable();
     if (!value) onDisable();
   });
 
-  toolThumbBtn.emitter.on('handleClick', () => toolThumb.toggle());
+  button.emitter.on('handleClick', () => tool.toggle());
 
-  return { toolThumb, toolThumbBtn };
+  return { tool, button };
 }
 
 export default toolThumbInit;

@@ -1,9 +1,9 @@
 import CustomButton from '../../custom-elements/button/button.js';
 import ToolFill from './fill.js';
 
-function toolFillInit(board, toolColor) {
-  const toolFill = new ToolFill(board, toolColor);
-  const toolFillBtn = new CustomButton({
+function toolFillInit(board) {
+  const tool = new ToolFill(board);
+  const button = new CustomButton({
     icon: 'colors',
     iconOnly: true,
     variant: null,
@@ -11,25 +11,25 @@ function toolFillInit(board, toolColor) {
   });
 
   function onEnable() {
-    toolFillBtn.setVariant('secondary');
-    toolFillBtn.setFill(true);
+    button.setVariant('secondary');
+    button.setFill(true);
   }
 
   function onDisable() {
-    toolFillBtn.setVariant(null);
-    toolFillBtn.setFill(false);
+    button.setVariant(null);
+    button.setFill(false);
   }
 
-  toolFill.emitter.on('enable', onEnable);
-  toolFill.emitter.on('disable', onDisable);
-  toolFill.emitter.on('toggle', (value) => {
+  tool.emitter.on('enable', onEnable);
+  tool.emitter.on('disable', onDisable);
+  tool.emitter.on('toggle', (value) => {
     if (value) onEnable();
     if (!value) onDisable();
   });
 
-  toolFillBtn.emitter.on('handleClick', () => toolFill.toggle());
+  button.emitter.on('handleClick', () => tool.toggle());
 
-  return { toolFill, toolFillBtn };
+  return { tool, button };
 }
 
 export default toolFillInit;

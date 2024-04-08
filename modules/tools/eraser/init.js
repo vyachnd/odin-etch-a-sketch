@@ -2,8 +2,8 @@ import CustomButton from '../../custom-elements/button/button.js';
 import ToolEraser from './eraser.js';
 
 function toolEraserInit(board) {
-  const toolEraser = new ToolEraser(board);
-  const toolEraserBtn = new CustomButton({
+  const tool = new ToolEraser(board);
+  const button = new CustomButton({
     icon: 'ink_eraser',
     iconOnly: true,
     variant: null,
@@ -11,25 +11,25 @@ function toolEraserInit(board) {
   });
 
   function onEnable() {
-    toolEraserBtn.setVariant('secondary');
-    toolEraserBtn.setFill(true);
+    button.setVariant('secondary');
+    button.setFill(true);
   }
 
   function onDisable() {
-    toolEraserBtn.setVariant(null);
-    toolEraserBtn.setFill(false);
+    button.setVariant(null);
+    button.setFill(false);
   }
 
-  toolEraser.emitter.on('enable', onEnable);
-  toolEraser.emitter.on('disable', onDisable);
-  toolEraser.emitter.on('toggle', (value) => {
+  tool.emitter.on('enable', onEnable);
+  tool.emitter.on('disable', onDisable);
+  tool.emitter.on('toggle', (value) => {
     if (value) onEnable();
     if (!value) onDisable();
   });
 
-  toolEraserBtn.emitter.on('handleClick', () => toolEraser.toggle());
+  button.emitter.on('handleClick', () => tool.toggle());
 
-  return { toolEraser, toolEraserBtn };
+  return { tool, button };
 }
 
 export default toolEraserInit;

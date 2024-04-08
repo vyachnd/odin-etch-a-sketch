@@ -2,8 +2,8 @@ import CustomButton from '../../custom-elements/button/button.js';
 import ToolDrag from './drag.js';
 
 function toolDragInit(camera) {
-  const toolDrag = new ToolDrag(camera);
-  const toolDragBtn = new CustomButton({
+  const tool = new ToolDrag(camera);
+  const button = new CustomButton({
     icon: 'drag_pan',
     iconOnly: true,
     variant: null,
@@ -11,25 +11,25 @@ function toolDragInit(camera) {
   });
 
   function onEnable() {
-    toolDragBtn.setVariant('secondary');
-    toolDragBtn.setFill(true);
+    button.setVariant('secondary');
+    button.setFill(true);
   }
 
   function onDisable() {
-    toolDragBtn.setVariant(null);
-    toolDragBtn.setFill(false);
+    button.setVariant(null);
+    button.setFill(false);
   }
 
-  toolDrag.emitter.on('enable', onEnable);
-  toolDrag.emitter.on('disable', onDisable);
-  toolDrag.emitter.on('toggle', (value) => {
+  tool.emitter.on('enable', onEnable);
+  tool.emitter.on('disable', onDisable);
+  tool.emitter.on('toggle', (value) => {
     if (value) onEnable();
     if (!value) onDisable();
   });
 
-  toolDragBtn.emitter.on('handleClick', () => toolDrag.toggle());
+  button.emitter.on('handleClick', () => tool.toggle());
 
-  return { toolDrag, toolDragBtn };
+  return { tool, button };
 }
 
 export default toolDragInit;
