@@ -39,6 +39,29 @@ function hexToRgba(hex) {
   return rgba;
 }
 
+function adjustColor(color, percent) {
+  const { r, g, b, a } = color;
+
+  const adjustComponent = (clr) => {
+    if (percent < 0 && clr === 0) return 0;
+    if (percent > 0 && clr === 255) return 255;
+
+    let delta = Math.round(percent / 100 * clr);
+
+    if (percent > 0 && delta === 0) delta = Math.max(1, delta);
+    if (percent < 0 && delta === 0) delta = Math.min(-1, delta);
+
+    return minmax(clr + delta, 0, 255);
+  };
+
+  return {
+    r: adjustComponent(r),
+    g: adjustComponent(g),
+    b: adjustComponent(b),
+    a: a,
+  };
+}
+
 function objectsEqual(obj1, obj2) {
   return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
@@ -49,5 +72,6 @@ export {
   randomRange,
   rgbaToHex,
   hexToRgba,
+  adjustColor,
   objectsEqual,
 };

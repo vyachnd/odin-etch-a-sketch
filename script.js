@@ -3,8 +3,8 @@
     - [x] Brush tool
     - [x] Fill tool
     - [x] Eraser tool
-    - [ ] Shading tool
-    - [ ] Lighting tool
+    - [x] Shading tool
+    - [x] Lighting tool
     - [x] Color selector tool
     - [x] Background color selector tool
     - [ ] Rainbow color tool
@@ -30,6 +30,7 @@ import Plate from './modules/plate.js';
 
 // Tools
 import { rgbaToHex } from './libraries/helpers.js';
+import toolAdjustColorInit from './modules/tools/adjustColor/init.js';
 import toolBrushInit from './modules/tools/brush/init.js';
 import toolColorInit from './modules/tools/color/init.js';
 import toolDragInit from './modules/tools/drag/init.js';
@@ -68,6 +69,8 @@ function initApp() {
   const { toolBrush, toolBrushBtn } = new toolBrushInit(board, toolColor);
   const { toolFill, toolFillBtn } = new toolFillInit(board, toolColor);
   const { toolEraser, toolEraserBtn } = new toolEraserInit(board);
+  const shadingTool = new toolAdjustColorInit(board);
+  const lightingTool = new toolAdjustColorInit(board);
 
   toolDrag.disable();
   toolThumb.enable();
@@ -75,6 +78,15 @@ function initApp() {
   toolBrush.enable();
   toolFill.enable();
   toolEraser.enable();
+
+
+  shadingTool.tool.enable();
+  shadingTool.tool.setFactor(-10);
+  shadingTool.button.setIcon('ev_shadow_minus');
+
+  lightingTool.tool.enable();
+  lightingTool.tool.setFactor(10);
+  lightingTool.button.setIcon('ev_shadow_add');
 
   toolColorBg.emitter.on('onChange', (rgba) => changeBoardColor(rgba));
 
@@ -107,6 +119,9 @@ function initApp() {
   toolbarElement.addElement(toolEraserBtn, 'toolEraserBtn');
   toolbarElement.addElement(toolColorBtn, 'toolColorBtn');
   toolbarElement.addElement(toolColorBgBtn, 'toolColorBgBtn');
+
+  toolbarElement.addElement(shadingTool.button, 'shadingTool');
+  toolbarElement.addElement(lightingTool.button, 'lightingTool');
 }
 
 unzoom(window);

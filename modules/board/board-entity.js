@@ -69,6 +69,17 @@ class BoardEntity {
     return false;
   }
 
+  getCell(position) {
+    if (this.isOut(position)) return null;
+
+    const cellKey = this.#cellKeyFormat(this.calculatePositionToCell(position));
+    const targetCell = this.cells.get(cellKey);
+
+    if (!targetCell) return;
+
+    return targetCell;
+  }
+
   getCellNeighbors(cellPos) {
     const neighbors = [
       { x: cellPos.x, y: cellPos.y - 1 },

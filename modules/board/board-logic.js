@@ -36,6 +36,7 @@ class BoardLogic {
   isOut(position) { return this._entity.isOut(position); }
   getCellNeighbors(cellPos) { return this._entity.getCellNeighbors(cellPos); }
   getCellsFrom(cellPos) { return this._entity.getCellsFrom(cellPos); }
+  getCell(position) { return this._entity.getCell(position); }
   erase(position) { this._entity.onErase(position); }
   brush(position, color) { this._entity.onBrush(position, color); }
   fill(position, color) { this._entity.onFill(position, color); }
