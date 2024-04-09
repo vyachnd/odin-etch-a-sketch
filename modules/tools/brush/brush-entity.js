@@ -17,21 +17,19 @@ class BrushEntity {
     this.enabled = false;
     this.emitter.fire('disable');
   }
-  toggle() {
-    this.enabled = !this.enabled;
-    this.emitter.fire('toggle', this.enabled);
-  }
+
+  getColor() { return Object.assign({}, this.color); }
 
   setColor(rgba) {
     this.color = Object.assign(this.color, rgba);
-    this.emitter.fire('setColor', this.color);
+    this.emitter.fire('setColor', this.getColor());
   }
 
-  onBrush(position, event) {
+  onBrush(position) {
     if (!this.enabled) return;
 
-    this.board.brush(position, this.toolColor.color);
-    this.emitter.fire('onBrush', position, this.toolColor.color, event);
+    this.board.brush(position, this.getColor());
+    this.emitter.fire('onBrush', position, this.getColor());
   }
 }
 

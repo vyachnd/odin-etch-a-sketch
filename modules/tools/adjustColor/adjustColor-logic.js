@@ -16,7 +16,13 @@ class AdjustColorLogic {
 
   enable() { this._entity.enable(); }
   disable() { this._entity.disable(); }
-  toggle() { this._entity.toggle(); }
+  toggle() {
+    if (this.isEnabled) {
+      this.disable();
+    } else {
+      this.enable();
+    }
+  }
 
   setFactor(factor) { this._entity.setFactor(factor); }
 

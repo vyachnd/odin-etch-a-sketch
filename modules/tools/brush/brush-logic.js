@@ -15,7 +15,13 @@ class BrushLogic {
 
   enable() { this._entity.enable(); }
   disable() { this._entity.disable(); }
-  toggle() { this._entity.toggle(); }
+  toggle() {
+    if (this.isEnabled) {
+      this.disable();
+    } else {
+      this.enable();
+    }
+  }
 
   setColor(rgba) { this._entity.setColor(rgba); }
 

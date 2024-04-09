@@ -18,7 +18,13 @@ class ThumbLogic {
 
   enable() { this._entity.enable(); }
   disable() { this._entity.disable(); }
-  toggle() { this._entity.toggle(); }
+  toggle() {
+    if (this.isEnabled) {
+      this.disable();
+    } else {
+      this.enable();
+    }
+  }
 
   hide() { this._entity.hide(); }
   show() { this._entity.show(); }

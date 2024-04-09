@@ -13,7 +13,13 @@ class GridLogic {
 
   enable() { this._entity.enable(); }
   disable() { this._entity.disable(); }
-  toggle() { this._entity.toggle(); }
+  toggle() {
+    if (this.isEnabled) {
+      this.disable();
+    } else {
+      this.enable();
+    }
+  }
 
   destroy() { this._render.destroy(); }
   render(parent) { this._render.render(parent); }

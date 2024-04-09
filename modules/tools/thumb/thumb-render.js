@@ -17,7 +17,6 @@ class ThumbRender {
 
     this.emitter.on('enable', () => this.updateDebounce());
     this.emitter.on('disable', () => this.updateDebounce());
-    this.emitter.on('toggle', () => this.updateDebounce());
     this.emitter.on('move', this.update);
     this.emitter.on('show', this.update);
     this.emitter.on('hide', this.update);

@@ -8,6 +8,8 @@ class ColorLogic {
   get emitter() { return this._entity.emitter; }
   get color() { return this._entity.color; }
 
+  setColor(rgba) { this._entity.setColor(rgba); }
+
   change(color) { this._entity.onChange(color); }
 }
 

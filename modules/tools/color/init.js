@@ -2,8 +2,8 @@ import { hexToRgba, rgbaToHex } from '../../../libraries/helpers.js';
 import CustomButton from '../../custom-elements/button/button.js';
 import ToolColor from './color.js';
 
-function toolColorInit(board) {
-  const tool = new ToolColor(board);
+function toolColorInit(color) {
+  const tool = new ToolColor({ entity: { color } });
   const button = new CustomButton({
     icon: 'circle',
     iconOnly: true,

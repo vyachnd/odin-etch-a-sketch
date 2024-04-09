@@ -26,10 +26,6 @@ class ThumbEntity {
     this.enabled = false;
     this.emitter.fire('disable');
   }
-  toggle() {
-    this.enabled = !this.enabled;
-    this.emitter.fire('toggle', this.enabled);
-  }
 
   show() {
     this.showed = true;

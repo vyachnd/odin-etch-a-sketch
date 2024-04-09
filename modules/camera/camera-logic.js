@@ -15,6 +15,10 @@ class CameraLogic {
   get cameraCenter() { return this._render.cameraCenter; }
   get fieldCenter() { return this._render.fieldCenter; }
 
+  get zoom() { return this._entity.zoom.current; }
+  get moveable() { return this._entity.moveable; }
+  get zoomable() { return this._entity.zoomable; }
+
   #isCtrlKey(event) {
     const { ctrlKey, metaKey } = event;
     return (ctrlKey || metaKey);

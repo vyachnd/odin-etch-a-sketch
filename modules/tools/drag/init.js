@@ -22,10 +22,6 @@ function toolDragInit(camera) {
 
   tool.emitter.on('enable', onEnable);
   tool.emitter.on('disable', onDisable);
-  tool.emitter.on('toggle', (value) => {
-    if (value) onEnable();
-    if (!value) onDisable();
-  });
 
   button.emitter.on('handleClick', () => tool.toggle());
 

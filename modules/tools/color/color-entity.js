@@ -2,14 +2,19 @@
 import Emitter from '../../../libraries/emitter.js';
 
 class ColorEntity {
-  constructor() {
-    this.color = { r: 56, g: 189, b: 248, a: 1 };
+  constructor(options) {
+    this.color = options.color || { r: 255, g: 255, b: 255, a: 1 };
     this.emitter = new Emitter();
   }
 
-  onChange(color) {
-    this.color = color;
-    this.emitter.fire('onChange', color);
+  setColor(rgba) {
+    this.color = Object.assign(this.color, rgba);
+    this.emitter.fire('setColor', this.color);
+  }
+
+  onChange(rgba) {
+    this.setColor(rgba);
+    this.emitter.fire('onChange', this.color);
   }
 }
 

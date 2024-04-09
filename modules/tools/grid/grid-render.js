@@ -17,7 +17,6 @@ class GridRender {
 
     this.emitter.on('enable', () => this.updateDebounce());
     this.emitter.on('disable', () => this.updateDebounce());
-    this.emitter.on('toggle', () => this.updateDebounce());
   }
 
   #createGridLine(top, left, isVertical) {
