@@ -22,6 +22,12 @@ function initTools(camera, board) {
   const shadingTool = new toolAdjustColorInit(board);
   const lightingTool = new toolAdjustColorInit(board);
 
+  let currentTool = null;
+  const toggledTools = [
+    dragTool, brushTool, fillTool,
+    eraserTool, shadingTool, lightingTool
+  ];
+
   shadingTool.tool.setFactor(-10);
   shadingTool.button.setIcon('ev_shadow_minus');
 
@@ -39,45 +45,21 @@ function initTools(camera, board) {
     board.target.style.backgroundColor = rgbaToHex(Object.assign({}, rgba, { a: 0.24 }));
   }
 
-  // Disable other tools
-  function disableTools(currentTool) {
-    const tools = [
-      dragTool, brushTool, fillTool,
-      eraserTool, shadingTool, lightingTool
-    ];
+  for (const tool of toggledTools) {
+    tool.tool.emitter.on('enable', () => {
+      if (currentTool) currentTool.tool.disable();
 
-    for (const tool of tools) {
-      if (tool === currentTool) continue;
-      if (tool.tool.isEnabled) tool.tool.disable();
-    }
+      if (tool === dragTool) {
+        thumbTool.tool.disable();
+      } else {
+        thumbTool.tool.enable();
+      }
+
+      currentTool = tool;
+    });
   }
 
-  dragTool.tool.emitter.on('enable', () => {
-    disableTools(dragTool);
-    thumbTool.tool.disable();
-  });
   dragTool.tool.emitter.on('disable', () => thumbTool.tool.enable());
-
-  brushTool.tool.emitter.on('enable', () => {
-    disableTools(brushTool);
-    thumbTool.tool.enable();
-  });
-  fillTool.tool.emitter.on('enable', () => {
-    disableTools(fillTool);
-    thumbTool.tool.enable();
-  });
-  eraserTool.tool.emitter.on('enable', () => {
-    disableTools(eraserTool);
-    thumbTool.tool.enable();
-  });
-  shadingTool.tool.emitter.on('enable', () => {
-    disableTools(shadingTool);
-    thumbTool.tool.enable();
-  });
-  lightingTool.tool.emitter.on('enable', () => {
-    disableTools(lightingTool);
-    thumbTool.tool.enable();
-  });
 
   gridTool.tool.enable();
   thumbTool.tool.enable();
