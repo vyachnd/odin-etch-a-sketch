@@ -47,7 +47,8 @@ function initTools(camera, board) {
     ];
 
     for (const tool of tools) {
-      if (tool !== currentTool) tool.tool.disable();
+      if (tool === currentTool) continue;
+      if (tool.tool.isEnabled) tool.tool.disable();
     }
   }
 
