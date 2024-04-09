@@ -14,6 +14,8 @@ class Plate {
   get target() { return this.elements.get('plate'); }
 
   addElement(element, name) {
+    if (!this.elements.get('user-elements')) this.elements.set('user-elements', new Map());
+
     const userElements = this.elements.get('user-elements');
     const elementName = name || element?.constructor?.name;
 
@@ -57,8 +59,6 @@ class Plate {
     if (!plate) {
       plate = document.createElement('div');
       this.elements.set('plate', plate);
-
-      this.elements.set('user-elements', new Map());
     }
 
     this.update();
