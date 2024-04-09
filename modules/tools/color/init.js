@@ -24,6 +24,7 @@ function toolColorInit(color) {
   colorContainer.classList.add('color-tool');
   colorSelector.classList.add('color-tool__input');
   colorSelector.type = 'color';
+  colorSelector.value = rgbaToHex(tool.color).slice(0, 7);
 
   colorContainer.append(colorSelector);
 
