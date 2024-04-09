@@ -26,10 +26,9 @@ import Board from './modules/board/board.js';
 import Camera from './modules/camera/camera.js';
 import CustomHeader from './modules/custom-elements/header/header.js';
 import CustomIcon from './modules/custom-elements/icon/icon.js';
-import Plate from './modules/plate.js';
 
 // Tools
-import CustomDivider from './modules/custom-elements/divider/divider.js';
+import Toolbar from './modules/toolbar/toolbar.js';
 import initTools from './modules/tools/init.js';
 
 function initApp() {
@@ -67,21 +66,8 @@ function initApp() {
   headerElement.render(appElement);
 
   // Toolbar
-  const toolbarElement = new Plate({ cls: ['top', 'center'] });
-
-  toolbarElement.addElement(tools.dragTool.button, 'dragTool');
-  toolbarElement.addElement(tools.brushTool.button, 'brushTool');
-  toolbarElement.addElement(tools.fillTool.button, 'fillTool');
-  toolbarElement.addElement(tools.eraserTool.button, 'eraserTool');
-  toolbarElement.addElement(tools.shadingTool.button, 'shadingTool');
-  toolbarElement.addElement(tools.lightingTool.button, 'lightingTool');
-  toolbarElement.addElement(new CustomDivider(), 'divider[1]');
-  toolbarElement.addElement(tools.brushColorTool.button, 'brushColorTool');
-  toolbarElement.addElement(tools.bgColorTool.button, 'bgColorTool');
-  toolbarElement.addElement(new CustomDivider(), 'divider[2]');
-  toolbarElement.addElement(tools.gridTool.button, 'gridTool');
-
-  toolbarElement.render(appElement);
+  const toolbar = new Toolbar(tools);
+  toolbar.render(appElement);
 }
 
 unzoom(window);
