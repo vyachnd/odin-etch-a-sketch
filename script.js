@@ -29,6 +29,7 @@ import CustomIcon from './modules/custom-elements/icon/icon.js';
 import Plate from './modules/plate.js';
 
 // Tools
+import CustomDivider from './modules/custom-elements/divider/divider.js';
 import initTools from './modules/tools/init.js';
 
 function initApp() {
@@ -74,14 +75,10 @@ function initApp() {
   toolbarElement.addElement(tools.eraserTool.button, 'eraserTool');
   toolbarElement.addElement(tools.shadingTool.button, 'shadingTool');
   toolbarElement.addElement(tools.lightingTool.button, 'lightingTool');
-
-  // Divider
-
+  toolbarElement.addElement(new CustomDivider(), 'divider[1]');
   toolbarElement.addElement(tools.brushColorTool.button, 'brushColorTool');
   toolbarElement.addElement(tools.bgColorTool.button, 'bgColorTool');
-
-  // Divider
-
+  toolbarElement.addElement(new CustomDivider(), 'divider[2]');
   toolbarElement.addElement(tools.gridTool.button, 'gridTool');
 
   toolbarElement.render(appElement);

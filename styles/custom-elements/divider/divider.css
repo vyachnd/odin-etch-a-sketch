@@ -1,0 +1,14 @@
+.custom-divider {
+  color: rgba(var(--color-zinc-50), 0.12);
+  border-style: solid;
+  border-radius: 2;
+  flex-grow: 1;
+
+  width: 2px;
+  margin: 0 8px;
+}
+
+.custom-divider[data-horizontal] {
+  height: 2px;
+  margin: 8px 0;
+}
