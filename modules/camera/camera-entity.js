@@ -27,8 +27,9 @@ class CameraEntity {
 
   setZoom(value) {
     if (!this.zoomable) return;
+    const current = Math.max(this.zoom.min, Math.min(this.zoom.max, value));
 
-    this.zoom.current = Math.max(this.zoom.min, Math.min(this.zoom.max, value));
+    this.zoom.current = +current.toFixed(1);
     this.emitter.fire('setZoom', this.zoom.current);
   }
 
@@ -60,14 +61,16 @@ class CameraEntity {
 
   onZoomIn(event) {
     if (!this.zoomable) return;
+    const current = Math.min(this.zoom.max, this.zoom.current + this.zoom.step);
 
-    this.zoom.current = Math.min(this.zoom.max, this.zoom.current + this.zoom.step);
+    this.zoom.current = +current.toFixed(1);
     this.emitter.fire('onZoomIn', this.zoom, event);
   }
   onZoomOut(event) {
     if (!this.zoomable) return;
+    const current = Math.max(this.zoom.min, this.zoom.current - this.zoom.step);
 
-    this.zoom.current = Math.max(this.zoom.min, this.zoom.current - this.zoom.step);
+    this.zoom.current = +current.toFixed(1);
     this.emitter.fire('onZoomOut', this.zoom, event);
   }
   onZoomReset(event) {

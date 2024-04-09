@@ -90,6 +90,54 @@ function initApp() {
   board.emitter.on('onErase', toggleClearButton);
   board.emitter.on('onBrush', toggleClearButton);
   board.emitter.on('onFill', toggleClearButton);
+
+  // Zoom buttons
+  const zoomBtnsCotaniner = document.createElement('div');
+  zoomBtnsCotaniner.classList.add('zoom-btns-container', 'flex', 'bottom', 'center');
+
+  const zoomOutBtn = new CustomButton({
+    icon: 'zoom_out',
+    iconOnly: true,
+    transparent: true,
+    disabled: true,
+  });
+
+  const zoomResetBtn = new CustomButton({
+    text: '100%',
+    transparent: true,
+  });
+
+  const zoomInBtn = new CustomButton({
+    icon: 'zoom_in',
+    iconOnly: true,
+    transparent: true,
+    disabled: true,
+  });
+  zoomOutBtn.emitter.on('handleClick', () => camera.zoomOut());
+  zoomResetBtn.emitter.on('handleClick', () => camera.zoomReset());
+  zoomInBtn.emitter.on('handleClick', () => camera.zoomIn());
+
+  function toggleZoomButtons() {
+    const { min, max, current } = camera.zoom;
+
+    zoomOutBtn.setDisabled(current <= min);
+    zoomInBtn.setDisabled(current >= max);
+
+    zoomResetBtn.setText(`${Math.round(current * 100)}%`);
+  }
+
+  camera.emitter.on('setZoom', toggleZoomButtons);
+  camera.emitter.on('setZoomable', toggleZoomButtons);
+  camera.emitter.on('onZoomIn', toggleZoomButtons);
+  camera.emitter.on('onZoomOut', toggleZoomButtons);
+  camera.emitter.on('onZoomReset', toggleZoomButtons);
+
+  toggleZoomButtons();
+
+  zoomOutBtn.render(zoomBtnsCotaniner);
+  zoomResetBtn.render(zoomBtnsCotaniner);
+  zoomInBtn.render(zoomBtnsCotaniner);
+  appElement.append(zoomBtnsCotaniner);
 }
 
 unzoom(window);

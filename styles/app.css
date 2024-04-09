@@ -6,3 +6,10 @@
 #app {
   overflow: hidden;
 }
+
+.zoom-btns-container {
+  gap: 4px;
+}
+.zoom-btns-container button:nth-child(2) {
+  min-width: 80px;
+}
