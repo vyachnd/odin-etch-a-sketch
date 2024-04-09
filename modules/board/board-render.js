@@ -20,6 +20,7 @@ class BoardRender {
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
 
+    this.emitter.on('onClear', this.#updateCells.bind(this));
     this.emitter.on('onErase', this.#updateCells.bind(this));
     this.emitter.on('onBrush', this.#updateCells.bind(this));
     this.emitter.on('onFill', this.#updateCells.bind(this));

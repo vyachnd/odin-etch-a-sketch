@@ -124,6 +124,11 @@ class BoardEntity {
     return findedCells;
   }
 
+  onClear() {
+    this.cells.clear();
+    this.emitter.fire('onClear');
+  }
+
   onErase(position) {
     if (this.isOut(position)) return;
 

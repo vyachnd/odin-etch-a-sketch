@@ -21,6 +21,7 @@ class BoardLogic {
   get grid() { return this._entity.grid; }
   get target() { return this._render.target; }
   get scale() { return this._render.scale; }
+  get cellCount() { return this._entity.cells.size; }
 
   calculatePosition(clientX, clientY) {
     const boardRect = this.target.getBoundingClientRect();
@@ -37,6 +38,7 @@ class BoardLogic {
   getCellNeighbors(cellPos) { return this._entity.getCellNeighbors(cellPos); }
   getCellsFrom(cellPos) { return this._entity.getCellsFrom(cellPos); }
   getCell(position) { return this._entity.getCell(position); }
+  clear() { this._entity.onClear(); }
   erase(position) { this._entity.onErase(position); }
   brush(position, color) { this._entity.onBrush(position, color); }
   fill(position, color) { this._entity.onFill(position, color); }
