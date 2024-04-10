@@ -6,6 +6,7 @@ import toolDragInit from './drag/init.js';
 import toolEraserInit from './eraser/init.js';
 import toolFillInit from './fill/init.js';
 import toolGridInit from './grid/init.js';
+import toolRainbowInit from './rainbow/init.js';
 import toolThumbInit from './thumb/init.js';
 
 function initTools(camera, board) {
@@ -21,11 +22,12 @@ function initTools(camera, board) {
   const eraserTool = new toolEraserInit(board);
   const shadingTool = new toolAdjustColorInit(board);
   const lightingTool = new toolAdjustColorInit(board);
+  const rainbowTool = new toolRainbowInit(board, brushColorTool.tool);
 
   let currentTool = null;
   const toggledTools = [
     dragTool, brushTool, fillTool,
-    eraserTool, shadingTool, lightingTool
+    eraserTool, shadingTool, lightingTool,
   ];
 
   shadingTool.tool.setFactor(-10);
@@ -82,6 +84,7 @@ function initTools(camera, board) {
     eraserTool,
     shadingTool,
     lightingTool,
+    rainbowTool,
   };
 }
 

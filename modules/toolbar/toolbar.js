@@ -13,6 +13,7 @@ function Toolbar(tools) {
   toolbarElement.addElement(new CustomDivider(), 'divider[1]');
   toolbarElement.addElement(tools.brushColorTool.button, 'brushColorTool');
   toolbarElement.addElement(tools.bgColorTool.button, 'bgColorTool');
+  toolbarElement.addElement(tools.rainbowTool.button, 'rainbowTool');
   toolbarElement.addElement(new CustomDivider(), 'divider[2]');
   toolbarElement.addElement(tools.gridTool.button, 'gridTool');
 
