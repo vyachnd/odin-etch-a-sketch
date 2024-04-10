@@ -1,19 +1,10 @@
 /*
   TODO:
-    - [x] Brush tool
-    - [x] Fill tool
-    - [x] Eraser tool
-    - [x] Shading tool
-    - [x] Lighting tool
-    - [x] Color selector tool
-    - [x] Background color selector tool
     - [ ] Rainbow color tool
     - [ ] Grid size change tool
 
     - [ ] History redo/undo
-    - [ ] Zoom in/reset/out
     - [ ] Move camera on board center
-    - [ ] Clear board
     - [ ] Save board as image
 */
 
