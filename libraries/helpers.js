@@ -41,7 +41,7 @@ function hexToRgba(hex) {
 }
 
 function adjustColor(color, percent) {
-  const { r, g, b, a } = color;
+  const { r, g, b, a = 1 } = color;
 
   const adjustComponent = (clr) => {
     if (percent < 0 && clr === 0) return 0;
