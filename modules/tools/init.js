@@ -49,7 +49,7 @@ function initTools(camera, board) {
 
   for (const tool of toggledTools) {
     tool.tool.emitter.on('enable', () => {
-      if (currentTool) currentTool.tool.disable();
+      if (currentTool && currentTool !== tool) currentTool.tool.disable();
 
       if (tool === dragTool) {
         thumbTool.tool.disable();

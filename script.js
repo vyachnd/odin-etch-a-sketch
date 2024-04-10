@@ -1,6 +1,5 @@
 /*
   TODO:
-    - [ ] Rainbow color tool
     - [ ] Grid size change tool
 
     - [ ] History redo/undo
