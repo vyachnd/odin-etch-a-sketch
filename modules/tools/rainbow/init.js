@@ -2,7 +2,7 @@ import CustomButton from '../../custom-elements/button/button.js';
 import ToolRainbow from './rainbow.js';
 
 function toolRainbowInit(board, toolColor) {
-  const tool = new ToolRainbow(board, toolColor);
+  const tool = new ToolRainbow(board, toolColor.tool);
   const button = new CustomButton({
     icon: 'looks',
     iconOnly: true,
@@ -15,6 +15,8 @@ function toolRainbowInit(board, toolColor) {
     button.setFill(true);
     button.setTransparent(true);
 
+    toolColor.button.setDisabled(true);
+
     tool.reset();
     tool.changeColor();
   }
@@ -23,6 +25,8 @@ function toolRainbowInit(board, toolColor) {
     button.setVariant(null);
     button.setFill(false);
     button.setTransparent(false);
+
+    toolColor.button.setDisabled(false);
   }
 
   tool.emitter.on('enable', onEnable);

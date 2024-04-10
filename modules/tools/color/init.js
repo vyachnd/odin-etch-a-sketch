@@ -1,4 +1,4 @@
-import { hexToRgba, rgbToHex } from '../../../libraries/helpers.js';
+import { assignMethodsToElement, hexToRgba, rgbToHex } from '../../../libraries/helpers.js';
 import CustomButton from '../../custom-elements/button/button.js';
 import ToolColor from './color.js';
 
@@ -27,6 +27,8 @@ function toolColorInit(color) {
   colorSelector.value = rgbToHex(tool.color);
 
   colorContainer.append(colorSelector);
+
+  assignMethodsToElement(colorContainer, button);
 
   colorContainer.render = (parent) => {
     button.render(colorContainer);

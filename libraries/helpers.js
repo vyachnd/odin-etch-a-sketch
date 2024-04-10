@@ -67,6 +67,18 @@ function objectsEqual(obj1, obj2) {
   return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
 
+function assignMethodsToElement(element, classInstance) {
+  let methods = Object.getOwnPropertyNames(Object.getPrototypeOf(classInstance));
+
+  methods = methods.filter((method) => method !== 'constructor' && typeof classInstance[method] === 'function');
+
+  methods.forEach(method => {
+    element[method] = function (...args) {
+      classInstance[method](...args);
+    };
+  });
+}
+
 export {
   getUniqueId,
   minmax,
@@ -75,4 +87,5 @@ export {
   hexToRgba,
   adjustColor,
   objectsEqual,
+  assignMethodsToElement,
 };

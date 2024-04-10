@@ -22,7 +22,7 @@ function initTools(camera, board) {
   const eraserTool = new toolEraserInit(board);
   const shadingTool = new toolAdjustColorInit(board);
   const lightingTool = new toolAdjustColorInit(board);
-  const rainbowTool = new toolRainbowInit(board, brushColorTool.tool);
+  const rainbowTool = new toolRainbowInit(board, brushColorTool);
 
   let currentTool = null;
   const toggledTools = [
