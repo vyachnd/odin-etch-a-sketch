@@ -1,5 +1,5 @@
 import debounce from '../../../libraries/debounce.js';
-import { rgbaToHex } from '../../libraries/helpers.js';
+import { rgbToHex } from '../../libraries/helpers.js';
 
 class BoardRender {
   constructor(entity, options) {
@@ -62,7 +62,7 @@ class BoardRender {
 
       const pos = this._entity.calculateCellToPosition(this._entity.calculatePositionToCell(position));
 
-      cell.style.backgroundColor = rgbaToHex(color);
+      cell.style.backgroundColor = rgbToHex(color, color.a);
       cell.style.width = `${cellSize}px`;
       cell.style.height = `${cellSize}px`;
       cell.style.left = `${pos.x}px`;

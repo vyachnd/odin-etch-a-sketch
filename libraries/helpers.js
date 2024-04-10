@@ -16,13 +16,14 @@ function randomRange(from, to) {
   return Math.random() * (to - from) + from;
 }
 
-function rgbaToHex(rgba) {
+function rgbToHex(rgba, alpha) {
   const r = Math.round(rgba.r);
   const g = Math.round(rgba.g);
   const b = Math.round(rgba.b);
-  const a = Math.round(rgba.a * 255);
 
-  const hex = ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1) + ((1 << 8) + a).toString(16).slice(1);
+  let hex = ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+
+  if (alpha) hex += ((1 << 8) + Math.round(alpha * 255)).toString(16).slice(1);
 
   return `#${hex}`.toUpperCase();
 }
@@ -70,7 +71,7 @@ export {
   getUniqueId,
   minmax,
   randomRange,
-  rgbaToHex,
+  rgbToHex,
   hexToRgba,
   adjustColor,
   objectsEqual,

@@ -1,4 +1,4 @@
-import { rgbaToHex } from '../../libraries/helpers.js';
+import { rgbToHex } from '../../libraries/helpers.js';
 import toolAdjustColorInit from './adjustColor/init.js';
 import toolBrushInit from './brush/init.js';
 import toolColorInit from './color/init.js';
@@ -42,7 +42,7 @@ function initTools(camera, board) {
 
   // Change board background color
   function changeBoardColor(rgba) {
-    board.target.style.backgroundColor = rgbaToHex(Object.assign({}, rgba, { a: 0.24 }));
+    board.target.style.backgroundColor = rgbToHex(Object.assign({}, rgba), 0.24);
   }
 
   for (const tool of toggledTools) {

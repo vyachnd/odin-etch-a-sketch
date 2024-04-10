@@ -1,4 +1,4 @@
-import { hexToRgba, rgbaToHex } from '../../../libraries/helpers.js';
+import { hexToRgba, rgbToHex } from '../../../libraries/helpers.js';
 import CustomButton from '../../custom-elements/button/button.js';
 import ToolColor from './color.js';
 
@@ -24,7 +24,7 @@ function toolColorInit(color) {
   colorContainer.classList.add('color-tool');
   colorSelector.classList.add('color-tool__input');
   colorSelector.type = 'color';
-  colorSelector.value = rgbaToHex(tool.color).slice(0, 7);
+  colorSelector.value = rgbToHex(tool.color);
 
   colorContainer.append(colorSelector);
 
@@ -32,7 +32,7 @@ function toolColorInit(color) {
     button.render(colorContainer);
     parent.append(colorContainer);
 
-    chagneBtnColor(rgbaToHex(tool.color));
+    chagneBtnColor(rgbToHex(tool.color));
   };
 
   colorSelector.addEventListener('input', (event) => {
@@ -41,9 +41,9 @@ function toolColorInit(color) {
   });
 
   tool.emitter.on('onChange', (rgba) => {
-    const hex = rgbaToHex(rgba);
+    const hex = rgbToHex(rgba);
 
-    colorSelector.value = hex.slice(0, 7);
+    colorSelector.value = hex;
     chagneBtnColor(hex);
   });
   button.emitter.on('handleClick', () => colorSelector.click());
