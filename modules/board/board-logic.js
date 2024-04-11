@@ -1,3 +1,5 @@
+import { deepCopyMap } from '../../libraries/helpers.js';
+
 class BoardLogic {
   constructor(entity, render) {
     this._entity = entity;
@@ -22,6 +24,7 @@ class BoardLogic {
   get target() { return this._render.target; }
   get scale() { return this._render.scale; }
   get cellCount() { return this._entity.cells.size; }
+  get cells() { return deepCopyMap(this._entity.cells); }
 
   calculatePosition(clientX, clientY) {
     const boardRect = this.target.getBoundingClientRect();
@@ -43,6 +46,7 @@ class BoardLogic {
   brush(position, color) { this._entity.onBrush(position, color); }
   fill(position, color) { this._entity.onFill(position, color); }
   move(position) { this._entity.onMove(position); }
+  setCells(cells) { this._entity.onSetCells(cells); }
 
   destroy() { this._render.destroy(); }
   render(parent) { this._render.render(parent); }

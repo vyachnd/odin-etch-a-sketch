@@ -79,6 +79,37 @@ function assignMethodsToElement(element, classInstance) {
   });
 }
 
+function deepCopyMap(orig) {
+  const copy = new Map();
+
+  orig.forEach((value, key) => {
+    if (value instanceof Map) {
+      copy.set(key, deepCopyMap(value));
+    } else if (typeof value === 'object' && value !== null) {
+      copy.set(key, deepCopyObject(value));
+    } else {
+      copy.set(key, value);
+    }
+  });
+
+  return copy;
+}
+
+function deepCopyObject(orig) {
+  const copy = {};
+
+  for (const [key, value] of Object.entries(orig)) {
+    if (value instanceof Map) {
+      copy[key] = deepCopyMap(value);
+    } else if (typeof value === 'object' && value !== null) {
+      copy[key] = deepCopyObject(value);
+    } else {
+      copy[key] = value;
+    }
+  }
+  return copy;
+}
+
 export {
   getUniqueId,
   minmax,
@@ -88,4 +119,6 @@ export {
   adjustColor,
   objectsEqual,
   assignMethodsToElement,
+  deepCopyMap,
+  deepCopyObject,
 };

@@ -128,6 +128,9 @@ function initApp() {
   zoomResetBtn.render(zoomBtnsCotaniner);
   zoomInBtn.render(zoomBtnsCotaniner);
   appElement.append(zoomBtnsCotaniner);
+
+  // Histroy
+  tools.historyTool.button.render(appElement);
 }
 
 unzoom(window);

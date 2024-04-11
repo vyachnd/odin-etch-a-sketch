@@ -124,6 +124,11 @@ class BoardEntity {
     return findedCells;
   }
 
+  onSetCells(cells) {
+    this.cells = cells;
+    this.emitter.fire('onSetCells');
+  }
+
   onClear() {
     this.cells.clear();
     this.emitter.fire('onClear');
@@ -145,7 +150,13 @@ class BoardEntity {
   onBrush(position, color) {
     if (this.isOut(position)) return;
 
-    const targetCell = this.cells.get(this.#cellKeyFormat(this.calculatePositionToCell(position)));
+    const cellPos = this.calculatePositionToCell(position);
+    const targetCell = this.cells.get(this.#cellKeyFormat(cellPos));
+
+    if (
+      objectsEqual(targetCell?.color, color)
+      && objectsEqual(this.calculatePositionToCell(targetCell?.position), cellPos)
+    ) return;
 
     if (targetCell) {
       targetCell.color = color;

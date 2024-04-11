@@ -6,6 +6,7 @@ import toolDragInit from './drag/init.js';
 import toolEraserInit from './eraser/init.js';
 import toolFillInit from './fill/init.js';
 import toolGridInit from './grid/init.js';
+import toolHistoryInit from './history/init.js';
 import toolRainbowInit from './rainbow/init.js';
 import toolThumbInit from './thumb/init.js';
 
@@ -23,6 +24,8 @@ function initTools(camera, board) {
   const shadingTool = new toolAdjustColorInit(board);
   const lightingTool = new toolAdjustColorInit(board);
   const rainbowTool = new toolRainbowInit(board, brushColorTool);
+
+  const historyTool = new toolHistoryInit(board);
 
   let currentTool = null;
   const toggledTools = [
@@ -85,6 +88,7 @@ function initTools(camera, board) {
     shadingTool,
     lightingTool,
     rainbowTool,
+    historyTool,
   };
 }
 
