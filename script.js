@@ -60,26 +60,8 @@ function initApp() {
   const toolbar = new Toolbar(tools);
   toolbar.render(appElement);
 
-  // Clear button
-  const clearButton = new CustomButton({
-    text: 'Clear',
-    icon: 'restart_alt',
-    cls: ['top', 'right'],
-    transparent: true,
-    disabled: true,
-  });
-  clearButton.render(appElement);
-  clearButton.emitter.on('handleClick', () => board.clear());
-
-  function toggleClearButton() {
-    if (board.cellCount === 0 && !clearButton.options.disabled) clearButton.setDisabled(true);
-    if (board.cellCount > 0 && clearButton.options.disabled) clearButton.setDisabled(false);
-  }
-
-  board.emitter.on('onClear', toggleClearButton);
-  board.emitter.on('onErase', toggleClearButton);
-  board.emitter.on('onBrush', toggleClearButton);
-  board.emitter.on('onFill', toggleClearButton);
+  // Clear tool
+  tools.clearTool.button.render(appElement);
 
   // Zoom tool
   tools.zoomTool.button.render(appElement);
