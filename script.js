@@ -81,10 +81,10 @@ function initApp() {
   board.emitter.on('onBrush', toggleClearButton);
   board.emitter.on('onFill', toggleClearButton);
 
-  // Zoom
+  // Zoom tool
   tools.zoomTool.button.render(appElement);
 
-  // Histro
+  // History tool
   tools.historyTool.button.render(appElement);
 }
 
