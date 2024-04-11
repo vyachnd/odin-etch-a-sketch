@@ -16,12 +16,7 @@ function toolClearInit(board) {
 
   plate.addElement(clearButton, 'clearButton');
 
-  function toggleButton() {
-    const cellCount = board.cellCount;
-    const isDisabled = clearButton.options.disabled;
-
-    clearButton.setDisabled(!(cellCount > 0 && isDisabled));
-  }
+  function toggleButton() { clearButton.setDisabled(!(board.cellCount > 0)); }
 
   board.emitter.on('onClear', toggleButton);
   board.emitter.on('onErase', toggleButton);
