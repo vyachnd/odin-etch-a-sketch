@@ -2,7 +2,6 @@
   TODO:
     - [ ] Grid size change tool
 
-    - [ ] History redo/undo
     - [ ] Move camera on board center
     - [ ] Save board as image
 */
@@ -12,7 +11,6 @@ import unzoom from './libraries/unzoom.js';
 import fontsMSPreload from './modules/custom-elements/materialSymbols.js';
 
 // Custom Elements
-import CustomButton from './modules/custom-elements/button/button.js';
 import CustomHeader from './modules/custom-elements/header/header.js';
 import CustomIcon from './modules/custom-elements/icon/icon.js';
 
