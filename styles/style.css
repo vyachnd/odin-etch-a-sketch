@@ -1,10 +1,10 @@
 @import './custom-elements/custom-elements.css';
 
 /* Elements */
-@import './app.css';
 @import './plate/plate.css';
 @import './camera/camera.css';
 @import './board/board.css';
+@import './app.css';
 
 /* Tools */
 @import './tools/thumb/thumb.css';

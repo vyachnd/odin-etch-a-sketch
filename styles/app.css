@@ -7,11 +7,14 @@
   overflow: hidden;
 }
 
-.history-btns-container,
-.zoom-btns-container {
+.plate_history,
+.plate_zoom {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
   gap: 4px;
 }
 
-.zoom-btns-container button:nth-child(2) {
+.plate_zoom .custom-button:nth-child(2) {
   min-width: 80px;
 }

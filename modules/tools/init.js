@@ -9,6 +9,7 @@ import toolGridInit from './grid/init.js';
 import toolHistoryInit from './history/init.js';
 import toolRainbowInit from './rainbow/init.js';
 import toolThumbInit from './thumb/init.js';
+import toolZoomInit from './zoom/init.js';
 
 function initTools(camera, board) {
   const brushColorTool = new toolColorInit({ r: 56, g: 189, b: 248, a: 1 });
@@ -26,6 +27,7 @@ function initTools(camera, board) {
   const rainbowTool = new toolRainbowInit(board, brushColorTool);
 
   const historyTool = new toolHistoryInit(board);
+  const zoomTool = new toolZoomInit(camera);
 
   let currentTool = null;
   const toggledTools = [
@@ -89,6 +91,7 @@ function initTools(camera, board) {
     lightingTool,
     rainbowTool,
     historyTool,
+    zoomTool,
   };
 }
 
