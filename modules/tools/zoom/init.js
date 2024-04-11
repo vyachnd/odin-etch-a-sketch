@@ -43,9 +43,13 @@ function toolZoomInit(camera) {
   camera.emitter.on('onZoomOut', toggleButtons);
   camera.emitter.on('onZoomReset', toggleButtons);
 
-  zoomOutBtn.emitter.on('handleClick', () => camera.zoomOut());
-  zoomResetBtn.emitter.on('handleClick', () => camera.zoomReset());
-  zoomInBtn.emitter.on('handleClick', () => camera.zoomIn());
+  tool.emitter.on('onZoomOut', toggleButtons);
+  tool.emitter.on('onZoomReset', toggleButtons);
+  tool.emitter.on('onZoomIn', toggleButtons);
+
+  zoomOutBtn.emitter.on('handleClick', tool.zoomOut.bind(tool));
+  zoomResetBtn.emitter.on('handleClick', tool.zoomReset.bind(tool));
+  zoomInBtn.emitter.on('handleClick', tool.zoomIn.bind(tool));
 
   toggleButtons();
 
