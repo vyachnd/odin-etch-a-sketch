@@ -32,9 +32,11 @@ class Plate {
     if (plate.classList.length > 0) plate.className = '';
     plate.classList.add('plate', ...this.options.cls);
 
-    for (const [, element] of userElements) {
-      if (!element.target) element.render(plate);
-      if (element.target) element.update();
+    if (userElements) {
+      for (const [, element] of userElements) {
+        if (!element.target) element.render(plate);
+        if (element.target) element.update();
+      }
     }
   }
 
