@@ -1,4 +1,5 @@
 import CustomButton from '../../custom-elements/button/button.js';
+import Plate from '../../plate.js';
 import ToolHistory from './history.js';
 
 function toolHistoryInit(board) {
@@ -15,39 +16,28 @@ function toolHistoryInit(board) {
     transparent: true,
     disabled: true,
   });
+  const plate = new Plate({
+    cls: ['plate_history', 'flex', 'bottom', 'left'],
+  });
 
-  const historyBtnsCotaniner = document.createElement('div');
-  historyBtnsCotaniner.classList.add('history-btns-container', 'flex', 'bottom', 'left');
+  plate.addElement(historyUndo, 'historyUndo');
+  plate.addElement(historyRedo, 'historyRedo');
 
-  historyBtnsCotaniner.destroy = () => {
-    historyUndo.destroy();
-    historyRedo.destroy();
-    historyBtnsCotaniner.remove();
-  };
-
-  historyBtnsCotaniner.update = () => {
+  function toggleButtons() {
     const { history, index } = tool;
 
     historyUndo.setDisabled(!(history.length > 0 && index > 0));
     historyRedo.setDisabled(!(history.length > 0 && index < history.length));
-  };
+  }
 
-  historyBtnsCotaniner.render = (parent) => {
-    historyUndo.render(historyBtnsCotaniner);
-    historyRedo.render(historyBtnsCotaniner);
-    parent.append(historyBtnsCotaniner);
-  };
-
-  const updateBind = historyBtnsCotaniner.update.bind(historyBtnsCotaniner);
-
-  tool.emitter.on('onChange', updateBind);
-  tool.emitter.on('undo', updateBind);
-  tool.emitter.on('redo', updateBind);
+  tool.emitter.on('onChange', toggleButtons);
+  tool.emitter.on('undo', toggleButtons);
+  tool.emitter.on('redo', toggleButtons);
 
   historyUndo.emitter.on('handleClick', () => tool.undo());
   historyRedo.emitter.on('handleClick', () => tool.redo());
 
-  return { tool, button: historyBtnsCotaniner };
+  return { tool, button: plate };
 }
 
 export default toolHistoryInit;
