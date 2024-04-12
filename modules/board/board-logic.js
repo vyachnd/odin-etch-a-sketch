@@ -21,10 +21,12 @@ class BoardLogic {
   get emitter() { return this._entity.emitter; }
   get position() { return this._entity.position; }
   get grid() { return this._entity.grid; }
-  get target() { return this._render.target; }
-  get scale() { return this._render.scale; }
   get cellCount() { return this._entity.cells.size; }
   get cells() { return deepCopyMap(this._entity.cells); }
+  get size() { return this._entity.size; }
+
+  get target() { return this._render.target; }
+  get scale() { return this._render.scale; }
 
   calculatePosition(clientX, clientY) {
     const boardRect = this.target.getBoundingClientRect();
