@@ -9,6 +9,7 @@ import toolFillInit from './fill/init.js';
 import toolGridInit from './grid/init.js';
 import toolHistoryInit from './history/init.js';
 import toolRainbowInit from './rainbow/init.js';
+import toolSaveInit from './save/init.js';
 import toolThumbInit from './thumb/init.js';
 import toolZoomInit from './zoom/init.js';
 
@@ -30,6 +31,7 @@ function initTools(camera, board) {
   const historyTool = new toolHistoryInit(board);
   const zoomTool = new toolZoomInit(camera);
   const clearTool = new toolClearInit(board);
+  const saveTool = new toolSaveInit(board);
 
   let currentTool = null;
   const toggledTools = [
@@ -95,6 +97,7 @@ function initTools(camera, board) {
     historyTool,
     zoomTool,
     clearTool,
+    saveTool,
   };
 }
 

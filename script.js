@@ -3,7 +3,6 @@
     - [ ] Grid size change tool
 
     - [ ] Move camera on board center
-    - [ ] Save board as image
 */
 
 // Helper functions
@@ -66,6 +65,9 @@ function initApp() {
 
   // History tool
   tools.historyTool.button.render(appElement);
+
+  // Save tool
+  tools.saveTool.button.render(appElement);
 }
 
 unzoom(window);
