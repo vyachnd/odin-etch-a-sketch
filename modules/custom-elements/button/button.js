@@ -1,4 +1,3 @@
-import debounce from '../../../libraries/debounce.js';
 import Emitter from '../../../libraries/emitter.js';
 import CustomIcon from '../icon/icon.js';
 
@@ -32,8 +31,6 @@ class CustomButton {
     this.parent = null;
     this.elements = new Map();
     this.emitter = new Emitter();
-
-    this.updateDebounce = debounce(this.update.bind(this), 100);
 
     this.handleClick = this.handleClick.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
