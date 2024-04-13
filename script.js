@@ -26,21 +26,6 @@ function initApp() {
   camera.render(appElement);
   camera.addEntity(board);
 
-  function moveBoardToCenter() {
-    const size = board.size;
-
-    board.move({
-      x: -size.width / 2,
-      y: -size.height / 2,
-    });
-
-    camera.move(camera.center);
-  }
-
-  board.emitter.on('onSetGrid', moveBoardToCenter);
-
-  moveBoardToCenter();
-
   // Initialize Tools
   const tools = new initTools(camera, board);
 
@@ -69,6 +54,12 @@ function initApp() {
 
   // Save tool
   tools.saveTool.element.render(appElement);
+
+  // Center tool
+  tools.centerTool.element.render(appElement);
+
+  board.emitter.on('onSetGrid', () => tools.centerTool.tool.center());
+  tools.centerTool.tool.center();
 }
 
 unzoom(window);

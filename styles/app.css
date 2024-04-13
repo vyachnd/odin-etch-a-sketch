@@ -12,9 +12,6 @@
 #app {
   width: 100vw;
   height: 100vh;
-}
-
-#app {
   overflow: hidden;
 }
 
@@ -33,4 +30,8 @@
 
 #app .plate_zoom .custom-button:nth-child(2) {
   min-width: 80px;
+}
+
+#app .center-tool {
+  margin-bottom: calc(56px + 16px + 24px);
 }

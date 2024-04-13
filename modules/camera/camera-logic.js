@@ -14,6 +14,7 @@ class CameraLogic {
   get target() { return this._render.target; }
   get center() { return this._render.center; }
 
+  get position() { return this._entity.position; }
   get zoom() { return this._entity.zoom; }
   get moveable() { return this._entity.moveable; }
   get zoomable() { return this._entity.zoomable; }

@@ -110,6 +110,13 @@ function deepCopyObject(orig) {
   return copy;
 }
 
+function distance(pos1, pos2) {
+  const { x: x1, y: y1 } = pos1;
+  const { x: x2, y: y2 } = pos2;
+
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+}
+
 export {
   getUniqueId,
   minmax,
@@ -121,4 +128,5 @@ export {
   assignMethodsToElement,
   deepCopyMap,
   deepCopyObject,
+  distance,
 };

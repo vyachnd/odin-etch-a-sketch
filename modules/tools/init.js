@@ -1,6 +1,7 @@
 import { rgbToHex } from '../../libraries/helpers.js';
 import toolAdjustColorInit from './adjustColor/init.js';
 import toolBrushInit from './brush/init.js';
+import toolCenterInit from './center/init.js';
 import toolClearInit from './clear/init.js';
 import toolColorInit from './color/init.js';
 import toolDragInit from './drag/init.js';
@@ -34,6 +35,7 @@ function initTools(camera, board) {
   const zoomTool = new toolZoomInit(camera);
   const clearTool = new toolClearInit(board);
   const saveTool = new toolSaveInit(board);
+  const centerTool = new toolCenterInit(camera, board);
 
   let currentTool = null;
   const toggledTools = [
@@ -101,6 +103,7 @@ function initTools(camera, board) {
     zoomTool,
     clearTool,
     saveTool,
+    centerTool,
   };
 }
 
