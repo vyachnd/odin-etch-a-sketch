@@ -49,6 +49,7 @@ class BoardLogic {
   fill(position, color) { this._entity.onFill(position, color); }
   move(position) { this._entity.onMove(position); }
   setCells(cells) { this._entity.onSetCells(cells); }
+  setGrid(grid) { this._entity.onSetGrid(grid); }
 
   destroy() { this._render.destroy(); }
   render(parent) { this._render.render(parent); }

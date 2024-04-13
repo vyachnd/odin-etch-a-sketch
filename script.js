@@ -33,12 +33,20 @@ function initApp() {
   camera.render(appElement);
   camera.addEntity(board);
 
-  board.move({
-    x: -board.target.offsetWidth / 2,
-    y: -board.target.offsetHeight / 2,
-  });
+  function moveBoardToCenter() {
+    const size = board.size;
 
-  camera.move(camera.fieldCenter);
+    board.move({
+      x: -size.width / 2,
+      y: -size.height / 2,
+    });
+
+    camera.move(camera.center);
+  }
+
+  board.emitter.on('onSetGrid', moveBoardToCenter);
+
+  moveBoardToCenter();
 
   // Initialize Tools
   const tools = new initTools(camera, board);

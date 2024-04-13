@@ -124,6 +124,13 @@ class BoardEntity {
     return findedCells;
   }
 
+  onSetGrid(grid) {
+    this.cells.clear();
+    this.grid = { ...this.grid, ...grid };
+
+    this.emitter.fire('onSetGrid', grid);
+  }
+
   onSetCells(cells) {
     this.cells = cells;
     this.emitter.fire('onSetCells');

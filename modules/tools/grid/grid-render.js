@@ -15,6 +15,7 @@ class GridRender {
 
     this.update = this.update.bind(this);
 
+    this._entity.board.emitter.on('onSetGrid', this.update);
     this.emitter.on('enable', () => this.render(this._entity.board.target));
     this.emitter.on('disable', () => this.destroy());
   }
