@@ -25,12 +25,19 @@ class CustomInput {
 
     this.updateDebounce = debounce(this.update.bind(this), 100);
 
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handlePaste = this.handlePaste.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   #createLeftRightElement(elementPosition, params) {
     const input = this.elements.get('input');
-    const inputField = this.elements.get('inputField');
     const element = this.elements.get(elementPosition);
 
     const updateElement = () => {
@@ -60,11 +67,12 @@ class CustomInput {
           if (this.options.rounded) params.options.rounded = true;
           newElement = new CustomButton(params.options);
 
-          newElement.emitter.on('handleClick', () => {
+          newElement.emitter.on('handleClick', (event) => {
             const buttonId = elementPosition === 'leftElement' ? 0 : 1;
 
             newElement.target.blur();
-            this.emitter.fire(`handleButtonClick`, buttonId);
+
+            this.emitter.fire(`handleButtonClick`, buttonId, event);
           });
         }
 
@@ -99,7 +107,15 @@ class CustomInput {
     }
   }
 
+  handleBlur(event) { this.emitter.fire('handleBlur', event); }
+  handleFocus(event) { this.emitter.fire('handleFocus', event); }
+  handleSelect(event) { this.emitter.fire('handleSelect', event); }
+  handlePaste(event) { this.emitter.fire('handlePaste', event); }
   handleInput(event) { this.emitter.fire('handleInput', event); }
+  handleChange(event) { this.emitter.fire('handleChange', event); }
+  handleKeyDown(event) { this.emitter.fire('handleKeyDown', event); }
+  handleKeyUp(event) { this.emitter.fire('handleKeyUp', event); }
+  handleKeyPress(event) { this.emitter.fire('handleKeyPress', event); }
 
   update() {
     const input = this.elements.get('input');
@@ -194,7 +210,15 @@ class CustomInput {
         set: (value) => this.setValue(value),
       });
 
+      inputField.addEventListener('blur', this.handleBlur.bind(this));
+      inputField.addEventListener('focus', this.handleFocus.bind(this));
+      inputField.addEventListener('select', this.handleSelect.bind(this));
+      inputField.addEventListener('paste', this.handlePaste.bind(this));
       inputField.addEventListener('input', this.handleInput.bind(this));
+      inputField.addEventListener('change', this.handleChange.bind(this));
+      inputField.addEventListener('keydown', this.handleKeyDown.bind(this));
+      inputField.addEventListener('keyup', this.handleKeyUp.bind(this));
+      inputField.addEventListener('keypress', this.handleKeyPress.bind(this));
 
       input.append(inputField);
     }
