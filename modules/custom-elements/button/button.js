@@ -95,10 +95,15 @@ class CustomButton {
 
     // Icon
     if (this.options.icon) {
-      icon.setIcon(this.options.icon);
-      icon.setOpsz(getOpszBySize(this.options.size));
-      icon.render(button);
-      button.prepend(icon.target);
+      icon.setOptions({
+        icon: this.options.icon,
+        opsz: getOpszBySize(this.options.size),
+      });
+
+      if (!icon.target) {
+        icon.render(button);
+        button.prepend(icon.target);
+      }
     } else {
       icon.destroy();
     }
@@ -107,7 +112,8 @@ class CustomButton {
     if (this.options.iconSecondary) {
       iconSecondary.setIcon(this.options.iconSecondary);
       iconSecondary.setOpsz(getOpszBySize(this.options.size));
-      iconSecondary.render(button);
+
+      if (!iconSecondary.target) iconSecondary.render(button);
     } else {
       iconSecondary.destroy();
     }
