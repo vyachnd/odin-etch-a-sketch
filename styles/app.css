@@ -1,3 +1,16 @@
+/* Custom Elements */
+@import './custom-elements/custom-elements.css';
+
+/* Elements */
+@import './plate/plate.css';
+@import './camera/camera.css';
+@import './board/board.css';
+
+/* Tools */
+@import './tools/thumb/thumb.css';
+@import './tools/grid/grid.css';
+@import './tools/color/color.css';
+
 #app {
   width: 100vw;
   height: 100vh;
@@ -7,6 +20,19 @@
   overflow: hidden;
 }
 
-.plate_zoom .custom-button:nth-child(2) {
+#app .top {
+  margin-top: 16px;
+}
+#app .right {
+  margin-right: 16px;
+}
+#app .bottom {
+  margin-bottom: 16px;
+}
+#app .left {
+  margin-left: 16px;
+}
+
+#app .plate_zoom .custom-button:nth-child(2) {
   min-width: 80px;
 }

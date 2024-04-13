@@ -1,15 +1,4 @@
-@import './custom-elements/custom-elements.css';
-
-/* Elements */
-@import './plate/plate.css';
-@import './camera/camera.css';
-@import './board/board.css';
 @import './app.css';
-
-/* Tools */
-@import './tools/thumb/thumb.css';
-@import './tools/grid/grid.css';
-@import './tools/color/color.css';
 
 * {
   color: rgb(var(--color-zinc-50));
@@ -24,17 +13,4 @@ body {
   background-color: rgb(var(--color-zinc-900));
   width: 100%;
   min-height: 100vh;
-}
-
-.top {
-  margin-top: 16px;
-}
-.right {
-  margin-right: 16px;
-}
-.bottom {
-  margin-bottom: 16px;
-}
-.left {
-  margin-left: 16px;
 }
