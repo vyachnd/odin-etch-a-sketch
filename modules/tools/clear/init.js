@@ -18,6 +18,7 @@ function toolClearInit(board) {
 
   function toggleButton() { clearButton.setOptions({ disabled: !(board.cellCount > 0) }); }
 
+  board.emitter.on('onSetCells', toggleButton);
   board.emitter.on('onClear', toggleButton);
   board.emitter.on('onErase', toggleButton);
   board.emitter.on('onBrush', toggleButton);
