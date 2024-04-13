@@ -6,7 +6,7 @@ class BoardEntity {
     this.grid = {
       rows: options?.grid?.rows || 8,
       cols: options?.grid?.cols || 8,
-      cellSize: 40,
+      cellSize: 32,
     };
     this.position = { x: 0, y: 0 };
     this.mouse = {

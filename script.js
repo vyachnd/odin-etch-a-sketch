@@ -1,10 +1,3 @@
-/*
-  TODO:
-    - [ ] Grid size change tool
-
-    - [ ] Move camera on board center
-*/
-
 // Helper functions
 import unzoom from './libraries/unzoom.js';
 import fontsMSPreload from './modules/custom-elements/materialSymbols.js';
@@ -28,7 +21,7 @@ function initApp() {
 
   // Create Camera and Board
   const camera = new Camera();
-  const board = new Board({ entity: { grid: { rows: 16, cols: 16 } } });
+  const board = new Board({ entity: { grid: { rows: 24, cols: 24 } } });
 
   camera.render(appElement);
   camera.addEntity(board);
