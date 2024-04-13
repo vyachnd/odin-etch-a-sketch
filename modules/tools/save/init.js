@@ -16,7 +16,7 @@ function toolZoomInit(board) {
 
   plate.addElement(saveBtn, 'saveBtn');
 
-  function toggleButton() { saveBtn.setDisabled(board.cellCount <= 0); }
+  function toggleButton() { saveBtn.setOptions({ disabled: board.cellCount <= 0 }); }
 
   board.emitter.on('onClear', toggleButton);
   board.emitter.on('onErase', toggleButton);

@@ -26,8 +26,8 @@ function toolHistoryInit(board) {
   function toggleButtons() {
     const { history, index } = tool;
 
-    historyUndo.setDisabled(!(history.length > 0 && index > 0));
-    historyRedo.setDisabled(!(history.length > 0 && index < history.length));
+    historyUndo.setOptions({ disabled: !(history.length > 0 && index > 0) });
+    historyRedo.setOptions({ disabled: !(history.length > 0 && index < history.length) });
   }
 
   tool.emitter.on('onChange', toggleButtons);

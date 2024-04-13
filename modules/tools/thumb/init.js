@@ -13,13 +13,17 @@ function toolThumbInit(board) {
   function onEnable() {
     if (!tool.target) tool.render(board.target);
 
-    button.setVariant('secondary');
-    button.setFill(true);
+    button.setOptions({
+      variant: 'secondary',
+      fill: true,
+    });
   }
 
   function onDisable() {
-    button.setVariant(null);
-    button.setFill(false);
+    button.setOptions({
+      variant: null,
+      fill: false,
+    });
   }
 
   tool.emitter.on('enable', onEnable);

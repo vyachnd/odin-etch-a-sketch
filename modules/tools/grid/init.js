@@ -13,14 +13,19 @@ function toolGridInit(board) {
   function onEnable() {
     if (!tool.target) tool.render(board.target);
 
-    button.setVariant('secondary');
-    button.setFill(true);
-    button.setTransparent(true);
+    button.setOptions({
+      variant: 'secondary',
+      fill: true,
+      transparent: true,
+    });
   }
 
   function onDisable() {
-    button.setVariant(null);
-    button.setFill(false);
+    button.setOptions({
+      variant: null,
+      fill: false,
+      transparent: false,
+    });
   }
 
   tool.emitter.on('enable', onEnable);

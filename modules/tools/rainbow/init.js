@@ -11,22 +11,26 @@ function toolRainbowInit(board, toolColor) {
   });
 
   function onEnable() {
-    button.setVariant('secondary');
-    button.setFill(true);
-    button.setTransparent(true);
+    button.setOptions({
+      variant: 'secondary',
+      fill: true,
+      transparent: true,
+    });
 
-    toolColor.element.setDisabled(true);
+    toolColor.element.setOptions({ disabled: true });
 
     tool.reset();
     tool.changeColor();
   }
 
   function onDisable() {
-    button.setVariant(null);
-    button.setFill(false);
-    button.setTransparent(false);
+    button.setOptions({
+      variant: null,
+      fill: false,
+      transparent: false,
+    });
 
-    toolColor.element.setDisabled(false);
+    toolColor.element.setOptions({ disabled: false });
   }
 
   tool.emitter.on('enable', onEnable);

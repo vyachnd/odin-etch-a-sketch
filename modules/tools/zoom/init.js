@@ -31,10 +31,9 @@ function toolZoomInit(camera) {
   function toggleButtons() {
     const { min, max, current } = camera.zoom;
 
-    zoomOutBtn.setDisabled(current <= min);
-    zoomInBtn.setDisabled(current >= max);
-
-    zoomResetBtn.setText(`${Math.round(current * 100)}%`);
+    zoomOutBtn.setOptions({ disabled: current <= min });
+    zoomInBtn.setOptions({ disabled: current >= max });
+    zoomResetBtn.setOptions({ text: `${Math.round(current * 100)}%` });
   }
 
   camera.emitter.on('setZoom', toggleButtons);

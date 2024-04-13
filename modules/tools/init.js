@@ -42,10 +42,10 @@ function initTools(camera, board) {
   ];
 
   shadingTool.tool.setFactor(-10);
-  shadingTool.element.setIcon('ev_shadow_minus');
+  shadingTool.element.setOptions({ icon: 'ev_shadow_minus' });
 
   lightingTool.tool.setFactor(10);
-  lightingTool.element.setIcon('ev_shadow_add');
+  lightingTool.element.setOptions({ icon: 'ev_shadow_add' });
 
   // Change brush and fill color
   function changeBrushFillColor(rgba) {

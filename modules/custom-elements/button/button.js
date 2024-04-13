@@ -48,64 +48,16 @@ class CustomButton {
   handleMouseUp(event) { this.emitter.fire('handleMouseUp', event); }
   handleDblClick(event) { this.emitter.fire('handleDblClick', event); }
 
-  setText(text) {
-    this.options.text = text;
-    this.updateDebounce();
-  }
+  setOptions(options) {
+    for (const option in options) {
+      if (this.options.hasOwnProperty(option)) {
+        this.options[option] = options[option];
 
-  setIcon(icon) {
-    this.options.icon = icon;
-    this.updateDebounce();
-  }
+        this.update();
 
-  setIconSecondary(icon) {
-    this.options.iconSecondary = icon;
-    this.updateDebounce();
-  }
-
-  setSize(size) {
-    this.options.size = size;
-    this.updateDebounce();
-  }
-
-  setVariant(variant) {
-    this.options.variant = variant;
-    this.updateDebounce();
-  }
-
-  setTransparent(transparent) {
-    this.options.transparent = transparent;
-    this.updateDebounce();
-  }
-
-  setFill(fill) {
-    this.options.fill = fill;
-    this.updateDebounce();
-  }
-
-  setAlign(align) {
-    this.options.align = align;
-    this.updateDebounce();
-  }
-
-  setIconOnly(iconOnly) {
-    this.options.iconOnly = iconOnly;
-    this.updateDebounce();
-  }
-
-  setRounded(rounded) {
-    this.options.rounded = rounded;
-    this.updateDebounce();
-  }
-
-  setActive(active) {
-    this.options.active = active;
-    this.updateDebounce();
-  }
-
-  setDisabled(disabled) {
-    this.options.disabled = disabled;
-    this.updateDebounce();
+        this.emitter.fire('setOptions', { type: option, value: options[option] });
+      }
+    }
   }
 
   update() {
@@ -257,17 +209,17 @@ class CustomButton {
         cls: ['button__icon', 'button__icon-left'],
       });
       this.elements.set('iconSecondary', iconSecondary);
+
+      button.addEventListener('click', this.handleClick);
+      button.addEventListener('mousedown', this.handleMouseDown);
+      button.addEventListener('mouseup', this.handleMouseUp);
+      button.addEventListener('dblclick', this.handleDblClick);
     }
 
-    button.addEventListener('click', this.handleClick);
-    button.addEventListener('mousedown', this.handleMouseDown);
-    button.addEventListener('mouseup', this.handleMouseUp);
-    button.addEventListener('dblclick', this.handleDblClick);
+    this.update();
 
     this.parent = parent;
     this.parent.append(button);
-
-    this.update();
   }
 }
 
