@@ -12,8 +12,7 @@ class CameraLogic {
 
   get emitter() { return this._entity.emitter; }
   get target() { return this._render.target; }
-  get cameraCenter() { return this._render.cameraCenter; }
-  get fieldCenter() { return this._render.fieldCenter; }
+  get center() { return this._render.center; }
 
   get zoom() { return this._entity.zoom; }
   get moveable() { return this._entity.moveable; }
