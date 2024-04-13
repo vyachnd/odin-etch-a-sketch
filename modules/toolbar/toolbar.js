@@ -2,7 +2,7 @@ import CustomDivider from '../custom-elements/divider/divider.js';
 import Plate from '../plate.js';
 
 function Toolbar(tools) {
-  const toolbarElement = new Plate({ cls: ['top', 'center'] });
+  const toolbarElement = new Plate({ cls: ['plate_toolbar', 'top', 'center'] });
 
   toolbarElement.addElement(tools.dragTool.element, 'dragTool');
   toolbarElement.addElement(tools.brushTool.element, 'brushTool');
