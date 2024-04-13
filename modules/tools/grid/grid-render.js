@@ -59,8 +59,6 @@ class GridRender {
   update() {
     const grid = this.elements.get('grid');
 
-    console.log(grid);
-
     if (!grid || !this._entity) return null;
 
     if (grid.classList.length > 0) grid.className = '';
