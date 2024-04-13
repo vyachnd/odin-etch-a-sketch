@@ -1,4 +1,4 @@
-import debounce from '../../../libraries/debounce.js';
+import debounce from '../../libraries/debounce.js';
 import { rgbToHex } from '../../libraries/helpers.js';
 
 class BoardRender {
