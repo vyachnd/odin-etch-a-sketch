@@ -28,42 +28,14 @@ class CustomIcon {
 
   get target() { return this.elements.get('icon'); }
 
-  setType(type) {
-    this.options.type = type;
-    this.updateDebounce();
-  }
+  setOptions(options) {
+    for (const option in options) {
+      if (this.options.hasOwnProperty(option)) {
+        this.options[option] = options[option];
 
-  toggleFill() {
-    this.options.fill = !this.options.fill;
-    this.updateDebounce();
-  }
-
-  setWght(wght) {
-    this.options.wght = Math.max(100, Math.min(780, wght));
-    this.updateDebounce();
-  }
-
-  setGrad(grad) {
-    this.options.grad = Math.max(-25, Math.min(200, grad));
-    this.updateDebounce();
-  }
-
-  setOpsz(opsz) {
-    this.options.opsz = Math.max(20, Math.min(48, opsz));
-    this.updateDebounce();
-  }
-
-  setIcon(icon) {
-    this.options.icon = icon;
-    this.updateDebounce();
-  }
-
-  destroy() {
-    const icon = this.elements.get('icon');
-
-    if (icon) icon.remove();
-
-    this.elements.clear();
+        this.update();
+      }
+    }
   }
 
   update() {
@@ -87,6 +59,14 @@ class CustomIcon {
     `;
   }
 
+  destroy() {
+    const icon = this.elements.get('icon');
+
+    if (icon) icon.remove();
+
+    this.elements.clear();
+  }
+
   render(parent) {
     if (!parent) return null;
 
@@ -97,10 +77,10 @@ class CustomIcon {
       this.elements.set('icon', icon);
     }
 
+    this.update();
+
     this.parent = parent;
     this.parent.append(icon);
-
-    this.update();
   }
 }
 
