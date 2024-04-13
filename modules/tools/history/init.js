@@ -37,7 +37,7 @@ function toolHistoryInit(board) {
   historyUndo.emitter.on('handleClick', () => tool.undo());
   historyRedo.emitter.on('handleClick', () => tool.redo());
 
-  return { tool, button: plate };
+  return { tool, element: plate };
 }
 
 export default toolHistoryInit;

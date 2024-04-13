@@ -27,7 +27,7 @@ function toolZoomInit(board) {
 
   toggleButton();
 
-  return { tool, button: plate };
+  return { tool, element: plate };
 }
 
 export default toolZoomInit;

@@ -27,7 +27,7 @@ function toolClearInit(board) {
 
   clearButton.emitter.on('handleClick', () => tool.clear());
 
-  return { tool, button: plate };
+  return { tool, element: plate };
 }
 
 export default toolClearInit;

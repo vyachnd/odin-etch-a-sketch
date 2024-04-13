@@ -10,6 +10,7 @@ import toolGridInit from './grid/init.js';
 import toolHistoryInit from './history/init.js';
 import toolRainbowInit from './rainbow/init.js';
 import toolSaveInit from './save/init.js';
+import toolSizeInit from './size/init.js';
 import toolThumbInit from './thumb/init.js';
 import toolZoomInit from './zoom/init.js';
 
@@ -20,6 +21,7 @@ function initTools(camera, board) {
   const dragTool = new toolDragInit(camera);
   const thumbTool = new toolThumbInit(board);
   const gridTool = new toolGridInit(board);
+  const sizeTool = new toolSizeInit(board);
 
   const brushTool = new toolBrushInit(board);
   const fillTool = new toolFillInit(board);
@@ -40,10 +42,10 @@ function initTools(camera, board) {
   ];
 
   shadingTool.tool.setFactor(-10);
-  shadingTool.button.setIcon('ev_shadow_minus');
+  shadingTool.element.setIcon('ev_shadow_minus');
 
   lightingTool.tool.setFactor(10);
-  lightingTool.button.setIcon('ev_shadow_add');
+  lightingTool.element.setIcon('ev_shadow_add');
 
   // Change brush and fill color
   function changeBrushFillColor(rgba) {
@@ -88,6 +90,7 @@ function initTools(camera, board) {
     dragTool,
     thumbTool,
     gridTool,
+    sizeTool,
     brushTool,
     fillTool,
     eraserTool,

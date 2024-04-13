@@ -58,16 +58,16 @@ function initApp() {
   toolbar.render(appElement);
 
   // Clear tool
-  tools.clearTool.button.render(appElement);
+  tools.clearTool.element.render(appElement);
 
   // Zoom tool
-  tools.zoomTool.button.render(appElement);
+  tools.zoomTool.element.render(appElement);
 
   // History tool
-  tools.historyTool.button.render(appElement);
+  tools.historyTool.element.render(appElement);
 
   // Save tool
-  tools.saveTool.button.render(appElement);
+  tools.saveTool.element.render(appElement);
 }
 
 unzoom(window);

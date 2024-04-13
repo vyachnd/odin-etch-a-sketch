@@ -53,7 +53,7 @@ function toolZoomInit(camera) {
 
   toggleButtons();
 
-  return { tool, button: plate };
+  return { tool, element: plate };
 }
 
 export default toolZoomInit;

@@ -15,7 +15,7 @@ function toolRainbowInit(board, toolColor) {
     button.setFill(true);
     button.setTransparent(true);
 
-    toolColor.button.setDisabled(true);
+    toolColor.element.setDisabled(true);
 
     tool.reset();
     tool.changeColor();
@@ -26,7 +26,7 @@ function toolRainbowInit(board, toolColor) {
     button.setFill(false);
     button.setTransparent(false);
 
-    toolColor.button.setDisabled(false);
+    toolColor.element.setDisabled(false);
   }
 
   tool.emitter.on('enable', onEnable);
@@ -34,7 +34,7 @@ function toolRainbowInit(board, toolColor) {
 
   button.emitter.on('handleClick', () => tool.toggle());
 
-  return { tool, button };
+  return { tool, element: button };
 }
 
 export default toolRainbowInit;

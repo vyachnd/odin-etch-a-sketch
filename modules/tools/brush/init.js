@@ -25,7 +25,7 @@ function toolBrushInit(board) {
 
   button.emitter.on('handleClick', () => tool.toggle());
 
-  return { tool, button };
+  return { tool, element: button };
 }
 
 export default toolBrushInit;

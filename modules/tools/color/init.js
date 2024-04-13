@@ -50,7 +50,7 @@ function toolColorInit(color) {
   });
   button.emitter.on('handleClick', () => colorSelector.click());
 
-  return { tool, button: colorContainer };
+  return { tool, element: colorContainer };
 }
 
 export default toolColorInit;
