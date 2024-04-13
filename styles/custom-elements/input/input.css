@@ -1,26 +1,30 @@
+/* States */
+@import './states/border.css';
 @import './states/disabled.css';
 @import './states/rounded.css';
 
+/* Variants */
+@import './variants/base.css';
+
 .custom-input {
-  background-color: rgba(var(--color-zinc-800));
-  color: rgba(var(--color-zinc-50));
-
   display: flex;
-  align-items: center;
+  position: relative;
 
+  width: 100%;
   border-radius: 6px;
 
-  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+  transition: background-color 0.15s, box-shadow 0.15s, color 0.15s, opacity 0.15s;
 }
 
 .custom-input .custom-input__field {
-  all: initial;
   appearance: none;
 
+  background: none;
+  outline: none;
+  border: none;
   color: inherit;
 
   width: 100%;
-  padding: 8px;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -28,19 +32,19 @@
 
   font: var(--font-roboto-normal);
 }
-.custom-input .custom-input__field:only-child {
+
+/* Paddings */
+.custom-input .custom-input__field {
   padding: 8px 16px;
 }
-.custom-input .custom-input__field:first-child {
-  padding-left: 16px;
+.custom-input .custom-input__field:not(:first-child) {
+  padding-left: 8px;
 }
-.custom-input .custom-input__field:last-child {
-  padding-right: 16px;
-}
-.custom-input .custom-input__field:placeholder {
-  color: rgba(var(--color-zinc-50), 0.24);
+.custom-input .custom-input__field:not(:last-child) {
+  padding-right: 8px;
 }
 
-.custom-input .custom-icon {
+/* Icon */
+.custom-input > .custom-icon {
   margin: 8px;
 }

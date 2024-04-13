@@ -2,9 +2,9 @@
   border-radius: 20px;
 }
 
-.custom-input[data-rounded] .custom-icon:first-child {
-  margin: 8px 8px 8px 16px;
+.custom-input[data-rounded] > .custom-icon:first-child {
+  margin-left: 14px;
 }
-.custom-input[data-rounded] .custom-icon:last-child {
-  margin: 8px 16px 8px 8px;
+.custom-input[data-rounded] > .custom-icon:last-child {
+  margin-right: 14px;
 }

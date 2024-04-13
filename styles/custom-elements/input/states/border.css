@@ -1,0 +1,5 @@
+.custom-input[data-border] {
+  --border-shadow: 0 0 0 1px;
+
+  box-shadow: var(--border-shadow) rgb(var(--color-zinc-700));
+}

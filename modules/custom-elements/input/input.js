@@ -7,12 +7,16 @@ class CustomInput {
   constructor(options) {
     this.options = {
       id: null,
+      cls: [],
       value: null,
       placeholder: null,
+      variant: null,
+      darkened: false,
+      border: false,
       rounded: false,
+      disabled: false,
       leftElement: null,
       rightElement: null,
-      cls: [],
       ...options,
     };
     this.parent = null;
@@ -21,12 +25,12 @@ class CustomInput {
 
     this.updateDebounce = debounce(this.update.bind(this), 100);
 
-    this.setValue = this.setValue.bind(this);
     this.handleInput = this.handleInput.bind(this);
   }
 
   #createLeftRightElement(elementPosition, params) {
     const input = this.elements.get('input');
+    const inputField = this.elements.get('inputField');
     const element = this.elements.get(elementPosition);
 
     const updateElement = () => {
@@ -55,6 +59,13 @@ class CustomInput {
         if (params.type === 'button') {
           if (this.options.rounded) params.options.rounded = true;
           newElement = new CustomButton(params.options);
+
+          newElement.emitter.on('handleClick', () => {
+            const buttonId = elementPosition === 'leftElement' ? 0 : 1;
+
+            newElement.target.blur();
+            this.emitter.fire(`handleButtonClick`, buttonId);
+          });
         }
 
         if (elementPosition === 'leftElement') newElement.options.cls.push('custom-input__left-element');
@@ -71,32 +82,24 @@ class CustomInput {
 
   get target() { return this.elements.get('input'); }
   get value() { return this.target.value; }
-  set value(value) { this.setValue(value); }
+  set value(value) { this.setOptions({ value }); }
 
   get leftElement() { return this.elements.get('leftElement'); }
   get rightElement() { return this.elements.get('rightElement'); }
 
+  setOptions(options) {
+    for (const option in options) {
+      if (this.options.hasOwnProperty(option)) {
+        this.options[option] = options[option];
+
+        this.update();
+
+        this.emitter.fire('setOptions', { type: option, value: options[option] });
+      }
+    }
+  }
+
   handleInput(event) { this.emitter.fire('handleInput', event); }
-
-  setValue(value) {
-    this.options.value = value;
-    this.updateDebounce();
-  }
-
-  setRounded(rounded) {
-    this.options.rounded = rounded;
-    this.updateDebounce();
-  }
-
-  setLeftElement(element) {
-    this.options.leftElement = element;
-    this.updateDebounce();
-  }
-
-  setRightElement(element) {
-    this.options.rightElement = element;
-    this.updateDebounce();
-  }
 
   update() {
     const input = this.elements.get('input');
@@ -104,20 +107,58 @@ class CustomInput {
 
     if (!input) return null;
 
+    // ID
+    if (this.options.id) {
+      inputField.id = this.options.id;
+    } else {
+      delete inputField.id;
+    }
+
+    // Class
     if (input.classList.length > 0) input.className = '';
     input.classList.add('custom-input', ...this.options.cls);
 
-    if (this.options.id && inputField.id !== this.options.id) inputField.id = this.options.id;
-    if (!this.options.id) delete inputField.id;
-
+    // Value
     inputField.value = this.options.value || '';
+
+    // Placeholder
     inputField.placeholder = this.options.placeholder || '';
+
+    // Variant
+    if (this.options.variant) {
+      input.dataset.variant = this.options.variant;
+    } else {
+      delete input.dataset.variant;
+    }
+
+    // Darkened
+    if (this.options.darkened) {
+      input.dataset.darkened = '';
+    } else {
+      delete input.dataset.darkened;
+    }
+
+    // Border
+    if (this.options.border) {
+      input.dataset.border = '';
+    } else {
+      delete input.dataset.border;
+    }
 
     // Rounded
     if (this.options.rounded) {
       input.dataset.rounded = '';
     } else {
       delete input.dataset.rounded;
+    }
+
+    // Disabled
+    if (this.options.disabled) {
+      input.dataset.disabled = '';
+      inputField.disabled = true;
+    } else {
+      delete input.dataset.disabled;
+      inputField.disabled = false;
     }
 
     // Create Left/Right Elements
@@ -140,6 +181,7 @@ class CustomInput {
 
     if (!input) {
       input = document.createElement('div');
+      input.tabindex = -1;
       this.elements.set('input', input);
 
       const inputField = document.createElement('input');

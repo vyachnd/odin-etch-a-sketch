@@ -1,0 +1,42 @@
+/* Base */
+.custom-input {
+  background-color: rgba(var(--color-zinc-800));
+  color: rgba(var(--color-zinc-50));
+}
+
+.custom-input .custom-input__field:placeholder {
+  color: rgba(var(--color-zinc-50), 0.4);
+}
+.custom-input > .custom-icon {
+  color: rgba(var(--color-zinc-50), 0.4);
+}
+
+/* Base Interactive */
+.custom-input:hover {
+  background-color: rgba(var(--color-zinc-700), 0.24);
+  box-shadow: var(--border-shadow) rgb(var(--color-zinc-600));
+}
+.custom-input:active {
+  background-color: rgba(var(--color-zinc-700), 0.6);
+  box-shadow: var(--border-shadow) rgba(var(--color-zinc-500), 0.6);
+}
+.custom-input:focus-within {
+  background-color: rgba(var(--color-zinc-900), 0.24);
+  box-shadow: var(--border-shadow) rgb(var(--color-zinc-500));
+}
+
+/* Base Darkened */
+.custom-input[data-darkened] {
+  background-color: rgba(var(--color-zinc-950));
+}
+
+/* Base Darkened Interactive */
+.custom-input[data-darkened]:hover {
+  background-color: rgba(var(--color-zinc-950), 0.6);
+}
+.custom-input[data-darkened]:active {
+  background-color: rgba(var(--color-zinc-950), 0.2);
+}
+.custom-input[data-darkened]:focus-within {
+  background-color: rgba(var(--color-zinc-900));
+}
