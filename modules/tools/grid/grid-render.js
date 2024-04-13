@@ -15,8 +15,8 @@ class GridRender {
 
     this.update = this.update.bind(this);
 
-    this.emitter.on('enable', () => this.updateDebounce());
-    this.emitter.on('disable', () => this.updateDebounce());
+    this.emitter.on('enable', () => this.render(this._entity.board.target));
+    this.emitter.on('disable', () => this.destroy());
   }
 
   #createGridLine(top, left, isVertical) {
@@ -31,22 +31,41 @@ class GridRender {
     return gridLine;
   }
 
+  #createGrid() {
+    const boardGrid = this._entity.board.grid;
+
+    const grid = this.elements.get('grid');
+    const gridLines = this.elements.get('grid-lines');
+
+    gridLines.forEach((gridLine) => gridLine.remove());
+
+    for (let i = 0; i <= boardGrid.rows; i += 1) {
+      const gridHorLine = this.#createGridLine(0, boardGrid.cellSize * i, false);
+      grid.append(gridHorLine);
+      gridLines.push(gridHorLine);
+    }
+
+    for (let i = 0; i <= boardGrid.cols; i += 1) {
+      const gridVerLine = this.#createGridLine(boardGrid.cellSize * i, 0, true);
+      grid.append(gridVerLine);
+      gridLines.push(gridVerLine);
+    }
+  }
+
   get emitter() { return this._entity.emitter; }
   get target() { return this.elements.get('grid'); }
 
   update() {
     const grid = this.elements.get('grid');
 
-    if (!this._entity.enabled) {
-      this.destroy();
-    } else {
-      if (!grid) this.render(this.parent);
-    }
+    console.log(grid);
 
     if (!grid || !this._entity) return null;
 
     if (grid.classList.length > 0) grid.className = '';
     grid.classList.add('grid', ...this.options.cls);
+
+    this.#createGrid();
   }
 
   destroy() {
@@ -63,26 +82,10 @@ class GridRender {
     let grid = this.elements.get('grid');
 
     if (!grid) {
-      const boardGrid = this._entity.board.grid;
-
       grid = document.createElement('div');
       this.elements.set('grid', grid);
 
       this.elements.set('grid-lines', []);
-      const gridLines = this.elements.get('grid-lines');
-
-      for (let i = 0; i <= boardGrid.rows; i += 1) {
-        const gridHorLine = this.#createGridLine(0, boardGrid.cellSize * i, false);
-        grid.append(gridHorLine);
-        gridLines.push(gridHorLine);
-      }
-
-      for (let i = 0; i <= boardGrid.cols; i += 1) {
-        const gridVerLine = this.#createGridLine(boardGrid.cellSize * i, 0, true);
-        grid.append(gridVerLine);
-        gridLines.push(gridVerLine);
-      }
-
     }
 
     this.update();

@@ -11,8 +11,6 @@ function toolGridInit(board) {
   });
 
   function onEnable() {
-    if (!tool.target) tool.render(board.target);
-
     button.setOptions({
       variant: 'secondary',
       fill: true,
