@@ -3,6 +3,7 @@ class CenterLogic {
   constructor(entity) {
     this._entity = entity;
 
+    this.camera.emitter.on('setPosition', this.onMove.bind(this));
     this.camera.emitter.on('onMove', this.onMove.bind(this));
   }
 
