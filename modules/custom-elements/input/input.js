@@ -4,6 +4,8 @@ import CustomButton from '../button/button.js';
 import CustomIcon from '../icon/icon.js';
 
 class CustomInput {
+  #BLUR_EVENT = null;
+
   constructor(options) {
     this.options = {
       id: null,
@@ -73,6 +75,11 @@ class CustomInput {
             newElement.target.blur();
 
             this.emitter.fire(`handleButtonClick`, buttonId, event);
+
+            if (this.#BLUR_EVENT) {
+              this.emitter.fire('handleBlur', this.#BLUR_EVENT);
+              this.#BLUR_EVENT = null;
+            }
           });
         }
 
@@ -107,7 +114,24 @@ class CustomInput {
     }
   }
 
-  handleBlur(event) { this.emitter.fire('handleBlur', event); }
+  handleBlur(event) {
+    const relatedTarget = event.relatedTarget;
+    const leftElement = this.elements.get('leftElement');
+    const rightElement = this.elements.get('rightElement');
+
+    if (
+      (leftElement && leftElement.target === relatedTarget)
+      || (rightElement && rightElement.target === relatedTarget)
+    ) {
+      event.preventDefault();
+
+      this.#BLUR_EVENT = event;
+
+      return;
+    }
+
+    this.emitter.fire('handleBlur', event);
+  }
   handleFocus(event) { this.emitter.fire('handleFocus', event); }
   handleSelect(event) { this.emitter.fire('handleSelect', event); }
   handlePaste(event) { this.emitter.fire('handlePaste', event); }
@@ -115,7 +139,14 @@ class CustomInput {
   handleChange(event) { this.emitter.fire('handleChange', event); }
   handleKeyDown(event) { this.emitter.fire('handleKeyDown', event); }
   handleKeyUp(event) { this.emitter.fire('handleKeyUp', event); }
-  handleKeyPress(event) { this.emitter.fire('handleKeyPress', event); }
+  handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      this.emitter.fire('handleSubmit', event);
+      event.target.blur();
+    } else {
+      this.emitter.fire('handleKeyPress', event);
+    }
+  }
 
   update() {
     const input = this.elements.get('input');
