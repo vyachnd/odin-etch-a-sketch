@@ -7,9 +7,7 @@
 @import './board/board.css';
 
 /* Tools */
-@import './tools/thumb/thumb.css';
-@import './tools/grid/grid.css';
-@import './tools/color/color.css';
+@import './tools/tools.css';
 
 #app {
   width: 100vw;
