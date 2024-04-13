@@ -26,11 +26,15 @@ class CameraEntity {
   setMouse(mouse) { this.mouse = { ...this.mouse, ...mouse }; }
 
   setZoom(value) {
-    if (!this.zoomable) return;
     const current = Math.max(this.zoom.min, Math.min(this.zoom.max, value));
 
     this.zoom.current = +current.toFixed(1);
     this.emitter.fire('setZoom', this.zoom.current);
+  }
+
+  setPosition(position) {
+    this.position = Object.assign(this.position, position);
+    this.emitter.fire('setPosition', position);
   }
 
   setMoveable(moveable) {

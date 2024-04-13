@@ -11,7 +11,7 @@ function toolCenterInit(camera, board) {
     transparent: true,
   });
 
-  tool.emitter.on('onMove', (distance) => {
+  function toggleButton(distance = 0) {
     if (distance < 100) {
       centerBtn.setOptions({
         transparent: true,
@@ -23,9 +23,14 @@ function toolCenterInit(camera, board) {
         disabled: false,
       });
     }
-  });
+  }
+
+  tool.emitter.on('onCenter', toggleButton);
+  tool.emitter.on('onMove', toggleButton);
 
   centerBtn.emitter.on('handleClick', () => tool.center());
+
+  toggleButton();
 
   return { tool, element: centerBtn };
 }

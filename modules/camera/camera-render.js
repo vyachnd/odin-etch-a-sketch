@@ -21,6 +21,7 @@ class CameraRender {
 
     this.emitter.on('addEntity', (entity) => this.addEntity(entity));
     this.emitter.on('setZoom', this.update);
+    this.emitter.on('setPosition', this.update);
     this.emitter.on('onMove', this.update);
     this.emitter.on('onZoomIn', this.update);
     this.emitter.on('onZoomOut', this.update);

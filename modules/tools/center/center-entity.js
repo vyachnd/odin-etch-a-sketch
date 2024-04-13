@@ -17,9 +17,9 @@ class CenterEntity {
       y: -size.height / 2,
     });
 
-    this.camera.move(this.camera.center);
+    this.camera.setPosition(this.camera.center);
 
-    this.emitter.on('onCenter');
+    this.emitter.fire('onCenter');
   }
 
   onMove(position) { this.emitter.fire('onMove', distance(this.camera.center, position)); }
