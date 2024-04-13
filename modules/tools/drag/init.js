@@ -24,6 +24,25 @@ function toolDragInit(camera) {
     });
   }
 
+  camera.emitter.on('onMouseDown', () => {
+    const mouse = camera.mouse;
+
+    if (!tool.isEnabled && mouse.button === 1) camera.setMoveable(true);
+  });
+  camera.emitter.on('onMouseUp', () => {
+    if (!tool.isEnabled) camera.setMoveable(false);
+  });
+  camera.emitter.on('onMouseMove', (event) => {
+    const mouse = camera.mouse;
+
+    if (mouse.down && mouse.button === 1) {
+      camera.move({
+        x: event.clientX - mouse.offset.x,
+        y: event.clientY - mouse.offset.y,
+      });
+    }
+  });
+
   tool.emitter.on('enable', onEnable);
   tool.emitter.on('disable', onDisable);
 

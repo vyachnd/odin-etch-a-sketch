@@ -10,14 +10,8 @@ class DragLogic {
 
   get isEnabled() { return this._entity.enabled; }
 
-  enable() {
-    this.camera.setMoveable(true);
-    this._entity.enable();
-  }
-  disable() {
-    this.camera.setMoveable(false);
-    this._entity.disable();
-  }
+  enable() { this._entity.enable(); }
+  disable() { this._entity.disable(); }
   toggle() {
     if (this.isEnabled) {
       this.disable();

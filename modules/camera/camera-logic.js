@@ -14,6 +14,7 @@ class CameraLogic {
   get target() { return this._render.target; }
   get center() { return this._render.center; }
 
+  get mouse() { return this._entity.mouse; }
   get position() { return this._entity.position; }
   get zoom() { return this._entity.zoom; }
   get moveable() { return this._entity.moveable; }
@@ -75,12 +76,14 @@ class CameraLogic {
     const position = this.calculatePosition(event.clientX, event.clientY);
     this._entity.onMouseMove(position, event);
 
-    if (!this._entity.mouse.down || this._entity.mouse.button !== 0) return;
+    const mouse = this._entity.mouse;
 
-    this._entity.onMove({
-      x: event.clientX - this._entity.mouse.offset.x,
-      y: event.clientY - this._entity.mouse.offset.y,
-    });
+    if (mouse.down && (mouse.button === 0 || mouse.button === 1)) {
+      this.move({
+        x: event.clientX - this._entity.mouse.offset.x,
+        y: event.clientY - this._entity.mouse.offset.y,
+      });
+    }
   }
 }
 
